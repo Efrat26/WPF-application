@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ex2_AP2"
+        xmlns:controls="clr-namespace:ex2_AP2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Image Service" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Settings">
+                <controls:settingsWindow></controls:settingsWindow>
+            </TabItem>
+            <TabItem Header="Logs"></TabItem>
+        </TabControl>
     </Grid>
 </Window>
