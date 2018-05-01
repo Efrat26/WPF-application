@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ex2 AP2", "ex2 AP2\ex2 AP2.csproj", "{E3D1EEE9-5633-4E1A-A33C-945778A18E12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageServiceGui", "ex2 AP2\ImageServiceGui.csproj", "{E3D1EEE9-5633-4E1A-A33C-945778A18E12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
