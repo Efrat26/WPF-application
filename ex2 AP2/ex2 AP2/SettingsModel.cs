@@ -16,9 +16,46 @@ namespace ex2_AP2
         private String logName;
         private int thumbnailSize;
 
-        public string OutputDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string SourceName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string LogName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int ThumbnailSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string OutputDirectory {
+            get
+            {
+                return this.outputDirectoryPath;
+            }
+            set
+            {
+                outputDirectoryPath = value;
+            }
+        }
+        public string SourceName
+        {
+            get
+            {
+                return this.sourceName;
+            }
+            set
+            {
+                sourceName = value;
+            }
+        }
+        public string LogName {
+            get
+            {
+                return this.logName;
+            }
+            set
+            {
+                logName = value;
+            }
+        }
+        public int ThumbnailSize {
+            get
+            {
+                return this.thumbnailSize;
+            }
+            set
+            {
+                thumbnailSize = value;
+            }
+        }
     }
 }

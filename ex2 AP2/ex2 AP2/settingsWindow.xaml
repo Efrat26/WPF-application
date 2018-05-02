@@ -29,13 +29,13 @@
             </Style>
         </Grid.Resources>
         <TextBlock>Output Directory:</TextBlock>
-        <TextBox x:Name="outputDirectory" Grid.Column="2"></TextBox>
+            <TextBox x:Name="outputDirectory" Grid.Column="2"  Text="{Binding OutputDirectory}"></TextBox>
         <TextBlock Grid.Row="1">Source Name:</TextBlock>
-        <TextBox x:Name="sourceName" Grid.Row="1" Grid.Column="2" ></TextBox>
+            <TextBox x:Name="sourceName" Grid.Row="1" Grid.Column="2" Text="{Binding SourceName}"></TextBox>
         <TextBlock Grid.Row="2">Log Name:</TextBlock>
-        <TextBox x:Name="logName" Grid.Row="2" Grid.Column="2"></TextBox>
+        <TextBox x:Name="logName" Grid.Row="2" Grid.Column="2" Text="{Binding LogName}"></TextBox>
         <TextBlock Grid.Row="3">Thumbnail Size:</TextBlock>
-        <TextBox x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" ></TextBox>
+        <TextBox x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" Text="{Binding ThumbnailSize}"></TextBox>
         </Grid>
         <Button>Remove</Button>
     </StackPanel>
