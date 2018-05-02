@@ -20,9 +20,12 @@ namespace ex2_AP2
     /// </summary>
     public partial class settingsWindow : UserControl
     {
+        private ViewModel settings_vm;
         public settingsWindow()
         {
             InitializeComponent();
+            settings_vm = new SettingsViewModel();
+            this.DataContext = settings_vm;
         }
     }
 }
