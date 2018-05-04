@@ -8,9 +8,9 @@ namespace ex2_AP2.Settings.Client
 {
     interface IClient
     {
-        void connect(string ip, int port);
-        void write(string command);
-        string read();  // blocking call
+        void connect(String ip, int port);
+        void write(String command);
+        String read();  // blocking call
         void disconnect();
     }
 }

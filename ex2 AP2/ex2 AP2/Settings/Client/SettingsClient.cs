@@ -33,10 +33,8 @@ namespace ex2_AP2.Settings.Client
             using (NetworkStream stream = client.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
-
                 // Get result from server
                 result = reader.ReadString();
-
             }
             return result;
         }

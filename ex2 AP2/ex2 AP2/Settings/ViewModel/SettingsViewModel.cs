@@ -13,6 +13,8 @@ namespace ex2_AP2
         public SettingsViewModel()
         {
             model = new SettingsModel();
+           // model.PropertyChanged += this.NotifyPropertyChanged;
+
         }
         public String OutputDirectory
         {
