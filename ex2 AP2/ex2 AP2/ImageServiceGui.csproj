@@ -54,11 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SettingsModel.cs" />
-    <Compile Include="SettingsViewModel.cs" />
-    <Compile Include="ISettingsModel.cs" />
-    <Compile Include="ViewModel.cs" />
-    <Compile Include="settingsWindow.xaml.cs">
+    <Compile Include="Settings\Model\SettingsModel.cs" />
+    <Compile Include="Settings\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Settings\Model\ISettingsModel.cs" />
+    <Compile Include="Settings\ViewModel\ViewModel.cs" />
+    <Compile Include="Settings\View\settingsWindow.xaml.cs">
       <DependentUpon>settingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -73,7 +73,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="settingsWindow.xaml">
+    <Page Include="Settings\View\settingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
