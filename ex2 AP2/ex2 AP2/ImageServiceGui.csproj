@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings\Client\IClient.cs" />
+    <Compile Include="Settings\Client\SettingsClient.cs" />
     <Compile Include="Settings\Model\SettingsModel.cs" />
     <Compile Include="Settings\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Settings\Model\ISettingsModel.cs" />
