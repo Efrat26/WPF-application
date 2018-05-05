@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command Enum\CommandEnum.cs" />
     <Compile Include="Settings\Client\IClient.cs" />
     <Compile Include="Settings\Client\SettingsClient.cs" />
     <Compile Include="Settings\Model\SettingsModel.cs" />
@@ -107,6 +108,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commands\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
