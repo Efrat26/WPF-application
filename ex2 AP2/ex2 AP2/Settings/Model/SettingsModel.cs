@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ImageService;
+using ImageService.AppConfigObjects;
 
 namespace ex2_AP2
 {
@@ -19,7 +21,9 @@ namespace ex2_AP2
         public SettingsModel()
         {
             client = new SettingsClient();
-            //client.connect("127.0.0.1", 8000);
+            client.connect("127.0.0.1", 8000);
+            client.write("getAppConfig");
+            String result = client.read();
         }
         public string OutputDirectory {
             get
