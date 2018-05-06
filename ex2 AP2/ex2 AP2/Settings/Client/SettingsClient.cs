@@ -15,8 +15,8 @@ namespace ex2_AP2.Settings.Client
         private IPEndPoint ep;
         private TcpClient client;
         private NetworkStream stream;
-        private StreamReader reader;
-        private StreamWriter writer;
+        private BinaryReader reader;
+        private BinaryWriter writer;
         public void connect(String IP, int port)
         {
             //ep = new IPEndPoint(IPAddress.Parse(IP), port);
@@ -24,8 +24,8 @@ namespace ex2_AP2.Settings.Client
             client = new TcpClient();
             client.Connect(ep);
             stream = client.GetStream();
-            reader = new StreamReader(stream);
-            writer = new StreamWriter(stream);
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
             Console.WriteLine("You are connected");
         }
 
@@ -45,7 +45,7 @@ namespace ex2_AP2.Settings.Client
             try
             {
                 // Get result from server
-                result = reader.ReadLine();
+                result = reader.ReadString();
                 return result;
             }
             catch (Exception)
@@ -70,8 +70,8 @@ namespace ex2_AP2.Settings.Client
             }
             finally
             {
-                writer.Dispose();
-                writer.Close();
+                //writer.Dispose();
+                //writer.Close();
             }
 
         }

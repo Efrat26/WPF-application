@@ -23,9 +23,13 @@ namespace ex2_AP2
             client = new SettingsClient();
             client.connect("127.0.0.1", 8000);
             String appConfigCommand = ((int)ImageService.ImageService.Infrastructure.Enums.CommandEnum.GetConfigCommand).ToString();
-            client.write(appConfigCommand);
-            
+            if (client != null)
+            {
+                client.write(appConfigCommand);
+                String answer = client.read();
+            }
             String result;
+            /*
             Task<String> taskA = new Task<String>(() => {
                 while (client.read() == null) {
                     Task.Delay(1000);
@@ -34,10 +38,12 @@ namespace ex2_AP2
                 return result;
             });
             // Start the task.
-           // taskA.Start();
-           // String taskResult = taskA.Result;
-            
+            taskA.Start();
+            taskA.Wait();
+            String taskResult = taskA.Result;
+        */    
         }
+
         public string OutputDirectory {
             get
             {
