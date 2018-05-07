@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageService;
 using ImageService.AppConfigObjects;
+using ImageService.ImageService.Infrastructure.Enums;
 
 namespace ex2_AP2
 {
@@ -22,20 +23,23 @@ namespace ex2_AP2
         {
             client = new SettingsClient();
             client.connect("127.0.0.1", 8000);
-            String appConfigCommand = ((int)ImageService.ImageService.Infrastructure.Enums.CommandEnum.GetConfigCommand).ToString();
+            String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
+            //set the inital configurations
             String answer = null;
             if (client != null)
             {
                 client.write(appConfigCommand);
                  answer = client.read();
             }
-            ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
-            this.OutputDirectory = initialConfig.OutputFolder;
-            this.LogName = initialConfig.LogName;
-            this.sourceName = initialConfig.SourceName;
-            this.thumbnailSize = initialConfig.ThumbnailSize;
+            if (!answer.Equals(ResultMessgeEnum.Fail))
+            {
+                ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
+                this.OutputDirectory = initialConfig.OutputFolder;
+                this.LogName = initialConfig.LogName;
+                this.sourceName = initialConfig.SourceName;
+                this.thumbnailSize = initialConfig.ThumbnailSize;
+            }
         }
-
         public string OutputDirectory {
             get
             {
