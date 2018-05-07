@@ -23,25 +23,17 @@ namespace ex2_AP2
             client = new SettingsClient();
             client.connect("127.0.0.1", 8000);
             String appConfigCommand = ((int)ImageService.ImageService.Infrastructure.Enums.CommandEnum.GetConfigCommand).ToString();
+            String answer = null;
             if (client != null)
             {
                 client.write(appConfigCommand);
-                String answer = client.read();
+                 answer = client.read();
             }
-            String result;
-            /*
-            Task<String> taskA = new Task<String>(() => {
-                while (client.read() == null) {
-                    Task.Delay(1000);
-                }
-                result = client.read();
-                return result;
-            });
-            // Start the task.
-            taskA.Start();
-            taskA.Wait();
-            String taskResult = taskA.Result;
-        */    
+            ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
+            this.OutputDirectory = initialConfig.OutputFolder;
+            this.LogName = initialConfig.LogName;
+            this.sourceName = initialConfig.SourceName;
+            this.thumbnailSize = initialConfig.ThumbnailSize;
         }
 
         public string OutputDirectory {
