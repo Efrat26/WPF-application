@@ -12,5 +12,6 @@ namespace ex2_AP2.Settings.Client
         void write(String command);
         String read();  // blocking call
         void disconnect();
+        bool isConnected();
     }
 }

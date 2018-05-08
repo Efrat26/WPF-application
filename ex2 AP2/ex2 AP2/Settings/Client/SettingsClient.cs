@@ -28,7 +28,14 @@ namespace ex2_AP2.Settings.Client
             writer = new BinaryWriter(stream);
             Console.WriteLine("You are connected");
         }
-
+        public bool isConnected()
+        {
+            if (client.Connected)
+            {
+                return true;
+            }
+            return false;
+        }
         public void disconnect()
         {
             writer.Close();

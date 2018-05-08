@@ -47,5 +47,7 @@
         <TextBox x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" Text="{Binding ThumbnailSize}"></TextBox>
         </Grid>
         <Button>Remove</Button>
+         <ListBox
+             ItemsSource="{Binding Handlers}"/>
     </StackPanel>
 </UserControl>

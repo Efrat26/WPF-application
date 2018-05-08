@@ -13,6 +13,8 @@ namespace ex2_AP2
         String OutputDirectory { get; set; }
         String SourceName { get; set; }
         String LogName { get; set; }
+        List<String> Handlers { get; set; }
+        //bool ConnectionSuccessful { get; set; }
         int ThumbnailSize { get; set; }
         void NotifyPropertyChanged(String propName);
         //void OnPropertyChanged(object sender, PropertyChangedEventArgs e);

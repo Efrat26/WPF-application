@@ -75,5 +75,18 @@ namespace ex2_AP2
                 
             }
         }
+        public List<String> Handlers
+        {
+            get
+            {
+                return model.Handlers;
+            }
+            set
+            {
+                //model.Handlers = value;
+                NotifyPropertyChanged("Handlers");
+            }
+        }
+
     }
 }

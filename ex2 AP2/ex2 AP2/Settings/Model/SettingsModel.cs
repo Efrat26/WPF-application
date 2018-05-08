@@ -19,10 +19,18 @@ namespace ex2_AP2
         private String sourceName;
         private String logName;
         private int thumbnailSize;
+        private Boolean connectionSuccessful;
+        List<String> handlers;
         public SettingsModel()
         {
+            this.handlers = new List<String>();
+            connectionSuccessful = false;
             client = new SettingsClient();
             client.connect("127.0.0.1", 8000);
+            if (client.isConnected())
+            {
+                connectionSuccessful = true;
+            }
             String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
             //set the inital configurations
             String answer = null;
@@ -38,6 +46,11 @@ namespace ex2_AP2
                 this.LogName = initialConfig.LogName;
                 this.sourceName = initialConfig.SourceName;
                 this.thumbnailSize = initialConfig.ThumbnailSize;
+                string[] folders = initialConfig.Handlers.Split(';');
+                foreach (String folder in folders)
+                {
+                    this.handlers.Add(folder);
+                }
             }
         }
         public string OutputDirectory {
@@ -84,6 +97,18 @@ namespace ex2_AP2
             {
                 thumbnailSize = value;
                 NotifyPropertyChanged("ThumbnailSize");
+            }
+        }
+        public List<String> Handlers
+        {
+            get
+            {
+                return this.handlers;
+            }
+            set
+            {
+                handlers = value;
+                NotifyPropertyChanged("Handlers");
             }
         }
         public void NotifyPropertyChanged(String propName)
