@@ -16,7 +16,6 @@ namespace ex2_AP2
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-        public abstract void OnSelectedItem(Object sender, RoutedEventArgs e);
         //public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         //{
         //  NotifyPropertyChanged(e.PropertyName);

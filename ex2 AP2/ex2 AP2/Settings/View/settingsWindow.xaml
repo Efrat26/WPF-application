@@ -46,7 +46,7 @@
         <TextBlock Grid.Row="3">Thumbnail Size:</TextBlock>
         <TextBox x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" Text="{Binding ThumbnailSize}"></TextBox>
         </Grid>
-        <Button x:Name="RemoveButton" Command="{Binding RemoveCommand}">Remove</Button>
+        <Button x:Name="RemoveButton" IsEnabled="{Binding RemoveButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Command="{Binding RemoveCommand}">Remove</Button>
         <ListBox 
             ItemsSource="{Binding Handlers}" SelectedItem="{Binding SelectedItem}"/>
     </StackPanel>

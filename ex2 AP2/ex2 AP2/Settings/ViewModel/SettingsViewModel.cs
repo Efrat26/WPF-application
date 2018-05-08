@@ -13,20 +13,17 @@ namespace ex2_AP2
 {
     class SettingsViewModel : ViewModel
     {
-        private Button removeButton;
         private ISettingsModel model;
         private String selectedHandler;
+        private bool canRemove;
         //public EventHandler OnSelectedItem;
         public SettingsViewModel()
         {
-            this.RemoveCommand = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
+            this.canRemove = false;
+            this.RemoveCommand = new DelegateCommand(this.OnRemove);
             model = new SettingsModel();
            // model.PropertyChanged += this.NotifyPropertyChanged;
 
-        }
-        public void setRemoveButton(Button b)
-        {
-            this.removeButton = b;
         }
         public String OutputDirectory
         {
@@ -108,23 +105,31 @@ namespace ex2_AP2
             set
             {
                 this.selectedHandler = value;
+                this.RemoveButton = true;
                 //NotifyPropertyChanged("Handlers");
             }
         }
+        public bool RemoveButton
+        {
+            get
+            {
+                return this.canRemove;
+            }
+            set
+            {
+                this.canRemove = value;
+                NotifyPropertyChanged("RemoveButton");
+            }
+        }
         public ICommand RemoveCommand { get; private set; }
-        private void OnRemove(object obj)
+        private void OnRemove()
         {
            // Debug.WriteLine(this.BuildResultString());
         }
 
         private bool CanRemove(object obj)
         {
-            return false;
-        }
-
-        public override void OnSelectedItem(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("hello world");
+            return this.RemoveButton;
         }
     }
 }

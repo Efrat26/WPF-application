@@ -28,10 +28,5 @@ namespace ex2_AP2
             settings_vm = new SettingsViewModel();
             this.DataContext = settings_vm;
         }
-
-        private void OnSelectedItem(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("hello world");
-        }
     }
 }
