@@ -47,8 +47,6 @@ namespace ex2_AP2.Settings.Client
         public String read()
         {
             String result;
-            // if (!client.Connected) { client.Connect(ep); }
-
             try
             {
                 // Get result from server

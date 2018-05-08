@@ -21,11 +21,17 @@ namespace ex2_AP2
     public partial class settingsWindow : UserControl
     {
         private ViewModel settings_vm;
+        public EventHandler SelectedHandker;
         public settingsWindow()
         {
             InitializeComponent();
             settings_vm = new SettingsViewModel();
             this.DataContext = settings_vm;
+        }
+
+        private void OnSelectedItem(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("hello world");
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ex2_AP2
 {
@@ -15,9 +16,10 @@ namespace ex2_AP2
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        public abstract void OnSelectedItem(Object sender, RoutedEventArgs e);
         //public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         //{
-          //  NotifyPropertyChanged(e.PropertyName);
-       // }
+        //  NotifyPropertyChanged(e.PropertyName);
+        // }
     }
 }

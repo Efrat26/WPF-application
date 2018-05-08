@@ -1,20 +1,32 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ex2_AP2
 {
     class SettingsViewModel : ViewModel
     {
+        private Button removeButton;
         private ISettingsModel model;
+        private String selectedHandler;
+        //public EventHandler OnSelectedItem;
         public SettingsViewModel()
         {
+            this.RemoveCommand = new DelegateCommand<object>(this.OnRemove, this.CanRemove);
             model = new SettingsModel();
            // model.PropertyChanged += this.NotifyPropertyChanged;
 
+        }
+        public void setRemoveButton(Button b)
+        {
+            this.removeButton = b;
         }
         public String OutputDirectory
         {
@@ -87,6 +99,32 @@ namespace ex2_AP2
                 NotifyPropertyChanged("Handlers");
             }
         }
+        public String SelectedItem
+        {
+            get
+            {
+                return this.selectedHandler;
+            }
+            set
+            {
+                this.selectedHandler = value;
+                //NotifyPropertyChanged("Handlers");
+            }
+        }
+        public ICommand RemoveCommand { get; private set; }
+        private void OnRemove(object obj)
+        {
+           // Debug.WriteLine(this.BuildResultString());
+        }
 
+        private bool CanRemove(object obj)
+        {
+            return false;
+        }
+
+        public override void OnSelectedItem(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("hello world");
+        }
     }
 }
