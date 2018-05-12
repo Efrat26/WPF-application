@@ -19,11 +19,16 @@ namespace ex2_AP2
         //public EventHandler OnSelectedItem;
         public SettingsViewModel()
         {
-            this.canRemove = false;
-            this.RemoveCommand = new DelegateCommand(this.OnRemove);
+           this.canRemove = false;
+            this.RemoveCommand = new DelegateCommand(this.OnRemove, this.CanRemove);
             model = new SettingsModel();
            // model.PropertyChanged += this.NotifyPropertyChanged;
 
+        }
+        public ICommand RemoveCommand
+        {
+            get;
+             set;
         }
         public String OutputDirectory
         {
@@ -105,8 +110,11 @@ namespace ex2_AP2
             set
             {
                 this.selectedHandler = value;
-                this.RemoveButton = true;
-                //NotifyPropertyChanged("Handlers");
+                this.canRemove = true;
+                var command = this.RemoveCommand as DelegateCommand;
+                command.RaiseCanExecuteChanged();
+                NotifyPropertyChanged("SelectedItem");
+                NotifyPropertyChanged("RemoveButton");
             }
         }
         public bool RemoveButton
@@ -121,15 +129,16 @@ namespace ex2_AP2
                 NotifyPropertyChanged("RemoveButton");
             }
         }
-        public ICommand RemoveCommand { get; private set; }
+        
         private void OnRemove()
         {
+            Console.WriteLine("hello world!");
            // Debug.WriteLine(this.BuildResultString());
         }
 
-        private bool CanRemove(object obj)
+        private bool CanRemove()
         {
-            return this.RemoveButton;
+            return this.canRemove;
         }
     }
 }
