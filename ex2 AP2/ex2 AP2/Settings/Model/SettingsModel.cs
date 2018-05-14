@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ImageService;
 using ImageService.AppConfigObjects;
 using ImageService.ImageService.Infrastructure.Enums;
+using ImageService.Controller.Handlers;
 
 namespace ex2_AP2
 {
@@ -114,6 +115,23 @@ namespace ex2_AP2
         public void NotifyPropertyChanged(String propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+        public bool RemoveHandler(String path)
+        {
+            HandlerToClose h = new HandlerToClose(path);
+            String jobject = h.ToJSON();
+            int message = (int)CommandEnum.CloseHandler;
+            client.write(message.ToString());
+            this.client.write(jobject);
+            string result = client.read();
+            if (result.Equals(ResultMessgeEnum.Success.ToString()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

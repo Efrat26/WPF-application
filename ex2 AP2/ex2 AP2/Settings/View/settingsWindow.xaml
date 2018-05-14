@@ -48,6 +48,6 @@
         </Grid>
         <Button x:Name="RemoveButton" Command="{Binding RemoveCommand}" Content="Remove" AutomationProperties.AutomationId="RemoveButton"/>
         <ListBox 
-            ItemsSource="{Binding Handlers}" SelectedItem="{Binding SelectedItem}"/>
+            ItemsSource="{Binding Handlers, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem}"/>
     </StackPanel>
 </UserControl>

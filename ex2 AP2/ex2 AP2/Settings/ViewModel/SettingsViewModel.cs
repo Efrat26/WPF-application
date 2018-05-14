@@ -113,8 +113,8 @@ namespace ex2_AP2
                 this.canRemove = true;
                 var command = this.RemoveCommand as DelegateCommand;
                 command.RaiseCanExecuteChanged();
-                NotifyPropertyChanged("SelectedItem");
-                NotifyPropertyChanged("RemoveButton");
+               NotifyPropertyChanged("SelectedItem");
+                //NotifyPropertyChanged("RemoveButton");
             }
         }
         public bool RemoveButton
@@ -132,8 +132,14 @@ namespace ex2_AP2
         
         private void OnRemove()
         {
-            Console.WriteLine("hello world!");
-           // Debug.WriteLine(this.BuildResultString());
+            bool result = this.model.RemoveHandler(this.selectedHandler);
+            if (result)
+            {
+                this.Handlers.Remove(this.selectedHandler);
+                this.canRemove = false;
+                var command = this.RemoveCommand as DelegateCommand;
+                command.RaiseCanExecuteChanged();
+            }
         }
 
         private bool CanRemove()

@@ -69,9 +69,9 @@ namespace ex2_AP2.Settings.Client
                 // Send data to server
                 writer.Write(command);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine("error in writing to client: " + e.ToString());
             }
             finally
             {
