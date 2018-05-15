@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace ex2_AP2
         String OutputDirectory { get; set; }
         String SourceName { get; set; }
         String LogName { get; set; }
-        List<String> Handlers { get; set; }
+        ObservableCollection<String> Handlers { get; set; }
         //bool ConnectionSuccessful { get; set; }
         int ThumbnailSize { get; set; }
         void NotifyPropertyChanged(String propName);

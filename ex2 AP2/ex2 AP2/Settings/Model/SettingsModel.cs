@@ -9,6 +9,7 @@ using ImageService;
 using ImageService.AppConfigObjects;
 using ImageService.ImageService.Infrastructure.Enums;
 using ImageService.Controller.Handlers;
+using System.Collections.ObjectModel;
 
 namespace ex2_AP2
 {
@@ -21,10 +22,10 @@ namespace ex2_AP2
         private String logName;
         private int thumbnailSize;
         private Boolean connectionSuccessful;
-        List<String> handlers;
+        ObservableCollection<String> handlers;
         public SettingsModel()
         {
-            this.handlers = new List<String>();
+            this.handlers = new ObservableCollection<String>();
             connectionSuccessful = false;
             client = new SettingsClient();
             client.connect("127.0.0.1", 8000);
@@ -100,7 +101,7 @@ namespace ex2_AP2
                 NotifyPropertyChanged("ThumbnailSize");
             }
         }
-        public List<String> Handlers
+        public ObservableCollection<String> Handlers
         {
             get
             {
@@ -126,6 +127,7 @@ namespace ex2_AP2
             string result = client.read();
             if (result.Equals(ResultMessgeEnum.Success.ToString()))
             {
+                this.handlers.Remove(path);
                 return true;
             }
             else
