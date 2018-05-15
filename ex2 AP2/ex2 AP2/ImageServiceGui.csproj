@@ -58,6 +58,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command Enum\CommandEnum.cs" />
+    <Compile Include="Logs\View\LogsWindow.xaml.cs">
+      <DependentUpon>LogsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings\Client\IClient.cs" />
     <Compile Include="Settings\Client\SettingsClient.cs" />
     <Compile Include="Settings\Model\SettingsModel.cs" />
@@ -67,6 +70,10 @@
     <Compile Include="Settings\View\settingsWindow.xaml.cs">
       <DependentUpon>settingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Logs\View\LogsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,7 +121,6 @@
     <Folder Include="Commands\" />
     <Folder Include="Logs\Model\" />
     <Folder Include="Logs\ViewModel\" />
-    <Folder Include="Logs\View\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\ImageService\ImageService\ImageService.csproj">

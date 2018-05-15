@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ex2_AP2"
         xmlns:controls="clr-namespace:ex2_AP2"
+        xmlns:controls1="clr-namespace:ex2_AP2.Logs.View"
         mc:Ignorable="d"
         Title="Image Service" Height="450" Width="800">
     <Grid>
@@ -12,7 +13,9 @@
             <TabItem Header="Settings">
                 <controls:settingsWindow></controls:settingsWindow>
             </TabItem>
-            <TabItem Header="Logs"></TabItem>
+            <TabItem Header="Logs">
+                <controls1:LogsWindow></controls1:LogsWindow>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

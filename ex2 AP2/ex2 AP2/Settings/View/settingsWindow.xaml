@@ -15,7 +15,7 @@
         </Style>
     </UserControl.Resources>
     <StackPanel>
-        <Label Style="{StaticResource settings_title}" Content="Settings"/>
+        <Label Style="{StaticResource settings_title}" Content="Settings" HorizontalContentAlignment="Center"/>
         <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
