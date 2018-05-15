@@ -112,7 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Logs\" />
+    <Folder Include="Logs\Model\" />
+    <Folder Include="Logs\ViewModel\" />
+    <Folder Include="Logs\View\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\ImageService\ImageService\ImageService.csproj">

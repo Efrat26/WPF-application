@@ -15,7 +15,7 @@
         </Style>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Style="{StaticResource settings_title}" Text="Settings"/>
+        <Label Style="{StaticResource settings_title}" Content="Settings"/>
         <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -37,14 +37,14 @@
                 <Setter Property="Margin" Value="3"/>
             </Style>
         </Grid.Resources>
-        <TextBlock>Output Directory:</TextBlock>
-            <TextBox x:Name="outputDirectory" Grid.Column="2"  Text="{Binding OutputDirectory}"></TextBox>
-        <TextBlock Grid.Row="1">Source Name:</TextBlock>
-            <TextBox x:Name="sourceName" Grid.Row="1" Grid.Column="2" Text="{Binding SourceName}"></TextBox>
-        <TextBlock Grid.Row="2">Log Name:</TextBlock>
-        <TextBox x:Name="logName" Grid.Row="2" Grid.Column="2" Text="{Binding LogName}"></TextBox>
-        <TextBlock Grid.Row="3">Thumbnail Size:</TextBlock>
-        <TextBox x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" Text="{Binding ThumbnailSize}"></TextBox>
+            <Label>Output Directory:</Label>
+            <Label x:Name="outputDirectory" Grid.Column="2"  Content="{Binding OutputDirectory}"></Label>
+            <Label Grid.Row="1">Source Name:</Label>
+            <Label x:Name="sourceName" Grid.Row="1" Grid.Column="2" Content="{Binding SourceName}"></Label>
+            <Label Grid.Row="2">Log Name:</Label>
+            <Label x:Name="logName" Grid.Row="2" Grid.Column="2" Content="{Binding LogName}"></Label>
+            <Label Grid.Row="3">Thumbnail Size:</Label>
+            <Label x:Name="thumbnailSize" Grid.Row="3" Grid.Column="2" Content="{Binding ThumbnailSize}"></Label>
         </Grid>
         <Button x:Name="RemoveButton" Command="{Binding RemoveCommand}" Content="Remove" AutomationProperties.AutomationId="RemoveButton"/>
         <ListBox 
