@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ex2_AP2.Logs.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,13 @@ namespace ex2_AP2.Logs.View
     /// </summary>
     public partial class LogsWindow : UserControl
     {
+        private ViewModelBaseClass logs_vm;
         public LogsWindow()
         {
+
             InitializeComponent();
+            this.logs_vm = new LogsViewModel();
+            this.DataContext = logs_vm;
         }
     }
 }

@@ -16,8 +16,17 @@
     </UserControl.Resources>
     <StackPanel>
         <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center"/>
-        <Grid>
-
+        
+        <Grid x:Name="logsGrid" TextBlock.FontSize="14">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" >Type</TextBlock>
+            <TextBlock Grid.Column="1">Message</TextBlock>
         </Grid>
     </StackPanel>
 </UserControl>

@@ -20,7 +20,7 @@ namespace ex2_AP2
     /// </summary>
     public partial class settingsWindow : UserControl
     {
-        private ViewModel settings_vm;
+        private ViewModelBaseClass settings_vm;
         public EventHandler SelectedHandker;
         public settingsWindow()
         {

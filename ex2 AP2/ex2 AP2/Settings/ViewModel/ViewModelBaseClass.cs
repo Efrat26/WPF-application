@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace ex2_AP2
 {
-    abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModelBaseClass : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace ex2_AP2
 {
-    class SettingsViewModel : ViewModel
+    class SettingsViewModel : ViewModelBaseClass
     {
         private ISettingsModel model;
         private String selectedHandler;
