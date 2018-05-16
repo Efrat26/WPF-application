@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ex2_AP2.Settings.Client
 {
-    class SettingsClient : IClient
+    public class GuiClient : IClient
     {
 
         private IPEndPoint ep;
