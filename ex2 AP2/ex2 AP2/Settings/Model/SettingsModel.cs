@@ -27,7 +27,7 @@ namespace ex2_AP2
         {
             this.handlers = new ObservableCollection<String>();
             connectionSuccessful = false;
-            client = new GuiClient();
+            client = GuiClient.Instance;
             client.connect("127.0.0.1", 8000);
             if (client.isConnected())
             {

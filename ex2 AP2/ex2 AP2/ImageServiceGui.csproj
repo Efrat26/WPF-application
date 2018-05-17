@@ -65,6 +65,7 @@
       <DependentUpon>LogsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\GuiClient.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Settings\Model\SettingsModel.cs" />
     <Compile Include="Settings\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Settings\Model\ISettingsModel.cs" />

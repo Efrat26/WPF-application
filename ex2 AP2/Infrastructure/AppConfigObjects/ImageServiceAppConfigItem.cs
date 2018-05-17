@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,16 +31,27 @@ namespace Logs.AppConfigObjects
         }
         public string ToJSON()
         {
+            ImageServiceAppConfigItem item = new ImageServiceAppConfigItem(null, null, null, null, 0);
+            item.OutputFolder = this.outputFolder;
+            item.SourceName = this.sourceName;
+            item.LogName = this.logName;
+            item.Handlers = this.handlers;
+            item.ThumbnailSize = this.thumbnailSize;
+            /*
             JObject appConfigItem = new JObject();
             appConfigItem["output"] = this.outputFolder;
             appConfigItem["source"] = this.sourceName;
             appConfigItem["log"] = this.logName;
             appConfigItem["handlers"] = this.handlers;
             appConfigItem["size"] = this.thumbnailSize;
+            return JsonConvert.SerializeObject(appConfigItem);
             return appConfigItem.ToString();
+            */
+            return JsonConvert.SerializeObject(item);
         }
         public static ImageServiceAppConfigItem FromJSON(string str)
         {
+            /*
             ImageServiceAppConfigItem appconf = new ImageServiceAppConfigItem(null,null,null,null,0);
             JObject appconfItem = JObject.Parse(str);
             appconf.outputFolder = (string)appconfItem["output"];
@@ -47,7 +59,11 @@ namespace Logs.AppConfigObjects
             appconf.logName = (string)appconfItem["log"];
             appconf.handlers = (string)appconfItem["handlers"];
             appconf.thumbnailSize = (int)appconfItem["size"];
+
+            
             return appconf;
+            */
+            return JsonConvert.DeserializeObject<ImageServiceAppConfigItem>(str);
         }
     }
 }

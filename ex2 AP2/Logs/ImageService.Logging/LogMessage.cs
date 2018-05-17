@@ -1,4 +1,5 @@
 ﻿using Logs.ImageService.Logging.Modal;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
@@ -25,27 +26,44 @@ namespace Logs.ImageService.Logging
         }
         public String ToJSON()
         {
-            Newtonsoft.Json.Linq.JObject logMessageItm = new Newtonsoft.Json.Linq.JObject();
-            logMessageItm["message"] = this.message;
-            logMessageItm["type"] = this.type.ToString();
-            return logMessageItm.ToString();
+            //Newtonsoft.Json.Linq.JObject logMessageItm = new Newtonsoft.Json.Linq.JObject();
+            LogMessage logMessageItm = new LogMessage(null, MessageTypeEnum.INFO);
+            logMessageItm.Message = this.Message;
+            logMessageItm.Type = this.type;
+
+            //logMessageItm["message"] = this.message;
+            // logMessageItm["type"] = 
+            return JsonConvert.SerializeObject(logMessageItm);
+            //return logMessageItm.ToString();
         }
         public static LogMessage FromJSON(string str)
         {
             LogMessage logMsg = new LogMessage("",MessageTypeEnum.INFO);
-            JObject json = JObject.Parse(str);
-            logMsg.Message = (string)json["message"];
-            string tmp = (string)json["type"];
-            if (tmp.Equals(MessageTypeEnum.FAIL.ToString()))
+            if (str != null)
             {
-                logMsg.type = MessageTypeEnum.FAIL;
-            } else if (tmp.Equals(MessageTypeEnum.INFO.ToString()))
-            {
-                logMsg.type = MessageTypeEnum.INFO;
+                logMsg = JsonConvert.DeserializeObject<LogMessage>(str);
+                /*
+                   JObject json = JObject.Parse(str);
+                logMsg.Message = (string)json["message"];
+                string tmp = (string)json["type"];
+                if (tmp.Equals(MessageTypeEnum.FAIL.ToString()))
+                {
+                    logMsg.type = MessageTypeEnum.FAIL;
+                }
+                else if (tmp.Equals(MessageTypeEnum.INFO.ToString()))
+                {
+                    logMsg.type = MessageTypeEnum.INFO;
+                }
+                else
+                {
+                    logMsg.type = MessageTypeEnum.WARNING;
+                }
+                */
             }
             else
             {
-                logMsg.type = MessageTypeEnum.WARNING;
+                logMsg.Message = "error in creating log message from json";
+                logMsg.Type = logMsg.type = MessageTypeEnum.FAIL;
             }
             return logMsg;
         }

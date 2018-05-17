@@ -21,10 +21,12 @@ namespace ex2_AP2
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private MainWindowViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
+            this.vm = new MainWindowViewModel();
+            this.DataContext = vm;
         }
     }
 }

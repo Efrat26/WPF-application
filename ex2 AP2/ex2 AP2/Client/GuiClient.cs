@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ex2_AP2.Settings.Client
 {
-    public class GuiClient : IClient
+    public sealed class GuiClient : IClient
     {
         private bool connected;
         private IPEndPoint ep;
@@ -17,6 +17,25 @@ namespace ex2_AP2.Settings.Client
         private NetworkStream stream;
         private BinaryReader reader;
         private BinaryWriter writer;
+
+        private static volatile GuiClient instance;
+        private static object syncRoot = new Object();
+        public static GuiClient Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new GuiClient();
+                    }
+                }
+
+                return instance;
+            }
+        }
         public void connect(String IP, int port)
         {
             //ep = new IPEndPoint(IPAddress.Parse(IP), port);

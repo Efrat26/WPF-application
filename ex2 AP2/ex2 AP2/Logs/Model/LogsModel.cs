@@ -18,7 +18,7 @@ namespace ex2_AP2.Logs.Model
         {
             this.logs = new ObservableCollection<LogMessage>();
             connectionSuccessful = false;
-            client = new GuiClient();
+            client = GuiClient.Instance;
             
             client.connect("127.0.0.1", 8000);
             if (client.isConnected())
@@ -47,6 +47,7 @@ namespace ex2_AP2.Logs.Model
                     }
                     else
                     {
+                        Console.WriteLine("in logs model going to parse to json, got: " + commandLine);
                         LogMessage log = LogMessage.FromJSON(commandLine);
                         App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                         {
