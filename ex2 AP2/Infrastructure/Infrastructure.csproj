@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigObjects\ImageServiceAppConfigItem.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Commands\ChangePropertyInAppConfig.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
@@ -52,10 +56,14 @@
     <Compile Include="Enums\ResultMessgeEnum.cs" />
     <Compile Include="Event\CommandRecievedEventArgs.cs" />
     <Compile Include="Event\DirectoryCloseEventArgs.cs" />
+    <Compile Include="HandlerToClose.cs" />
     <Compile Include="IDirectoryHandler.cs" />
     <Compile Include="IImageController.cs" />
     <Compile Include="IImageServiceModal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

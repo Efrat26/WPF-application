@@ -121,10 +121,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ImageService\ImageService\ImageService.csproj">
-      <Project>{20a2843f-8477-4219-90aa-2aed8530fe1f}</Project>
-      <Name>ImageService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{6c0785a8-9a11-440e-8a02-4bfef131ea86}</Project>
       <Name>Communication</Name>
