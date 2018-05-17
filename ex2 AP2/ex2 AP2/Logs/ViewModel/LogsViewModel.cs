@@ -1,5 +1,5 @@
 ﻿using ex2_AP2.Logs.Model;
-using ImageService.ImageService.Logging;
+using Logs.ImageService.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

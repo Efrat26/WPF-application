@@ -57,7 +57,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command Enum\CommandEnum.cs" />
     <Compile Include="Logs\Model\ILogsModel.cs" />
     <Compile Include="Logs\Model\LogsModel.cs" />
     <Compile Include="Logs\ViewModel\LogsViewModel.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Logs\View\LogsWindow.xaml.cs">
       <DependentUpon>LogsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Client\IClient.cs" />
     <Compile Include="Client\GuiClient.cs" />
     <Compile Include="Settings\Model\SettingsModel.cs" />
     <Compile Include="Settings\ViewModel\SettingsViewModel.cs" />
@@ -121,13 +119,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\ImageService\ImageService\ImageService.csproj">
       <Project>{20a2843f-8477-4219-90aa-2aed8530fe1f}</Project>
       <Name>ImageService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{6c0785a8-9a11-440e-8a02-4bfef131ea86}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{77cd3566-6cc7-4213-ad0f-80c895e84c14}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logs\Logs.csproj">
+      <Project>{6190e687-26b0-48bd-ae4d-0440b72f2531}</Project>
+      <Name>Logs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

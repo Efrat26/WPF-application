@@ -15,10 +15,9 @@
         </Style>
         <local:LogConventer x:Key="logs_background"/>
     </UserControl.Resources>
-    
+
     <StackPanel>
         <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center"/>
-
         <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" Width="1*" IsReadOnly="True" Binding="{Binding Type}">

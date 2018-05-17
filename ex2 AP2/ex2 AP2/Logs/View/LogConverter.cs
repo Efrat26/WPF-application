@@ -1,5 +1,5 @@
-﻿using ImageService.ImageService.Logging;
-using ImageService.ImageService.Logging.Modal;
+﻿using Logs.ImageService.Logging;
+using Logs.ImageService.Logging.Modal;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

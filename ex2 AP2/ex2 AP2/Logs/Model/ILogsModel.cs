@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ImageService.ImageService.Logging;
+using Logs.ImageService.Logging;
 namespace ex2_AP2.Logs.Model
 {
     public interface ILogsModel : INotifyPropertyChanged

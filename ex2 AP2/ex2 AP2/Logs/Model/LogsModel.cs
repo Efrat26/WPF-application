@@ -1,18 +1,10 @@
-﻿using ex2_AP2.Command_Enum;
-using ex2_AP2.Settings.Client;
-using ImageService.Commands;
-using ImageService.ImageService.Logging;
-using ImageService.ImageService.Logging.Modal;
+﻿using ex2_AP2.Settings.Client;
+using Logs.Commands;
+using Logs.ImageService.Logging;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
-using ImageService.ImageService.Infrastructure.Enums;
 namespace ex2_AP2.Logs.Model
 {
     public class LogsModel : ILogsModel
@@ -32,7 +24,7 @@ namespace ex2_AP2.Logs.Model
             if (client.isConnected())
             {
                 connectionSuccessful = true;
-                String msg = ((int)ImageService.ImageService.Infrastructure.Enums.CommandEnum.LogCommand).ToString();
+                String msg = ((int)Infrastructure.Enums.CommandEnum.LogCommand).ToString();
                 Console.WriteLine("in logs modedl, sending: " + msg);
                 client.write(msg);
                 this.Listen();
@@ -48,7 +40,8 @@ namespace ex2_AP2.Logs.Model
                 {
                     string commandLine = client.read();
                     Console.WriteLine("in logs view model, got: "+commandLine);
-                    if (commandLine.Equals(ResultMessgeEnum.Success.ToString()) || commandLine.Equals(ResultMessgeEnum.Fail.ToString()))
+                    if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()) ||
+                    commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
                     {
                         Console.WriteLine("in logs model, got: " + commandLine);
                     }

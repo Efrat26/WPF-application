@@ -5,10 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ImageService;
-using ImageService.AppConfigObjects;
-using ImageService.ImageService.Infrastructure.Enums;
-using ImageService.Controller.Handlers;
+using Logs;
+using Logs.AppConfigObjects;
+using Infrastructure.Enums;
+using Logs.Controller.Handlers;
 using System.Collections.ObjectModel;
 
 namespace ex2_AP2

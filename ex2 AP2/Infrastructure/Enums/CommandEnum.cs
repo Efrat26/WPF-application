@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ex2_AP2.Command_Enum
+namespace Infrastructure.Enums
 {
+    /// <summary>
+    /// enum for the commands that are sent
+    /// </summary>
     public enum CommandEnum : int
     {
         NewFileCommand,
         GetConfigCommand,
         LogCommand,
-        CloseCommand
+        CloseCommand,
+        CloseHandler
     }
 }
