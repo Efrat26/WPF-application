@@ -23,7 +23,7 @@ namespace ex2_AP2
            this.canRemove = false;
             this.RemoveCommand = new DelegateCommand(this.OnRemove, this.CanRemove);
             model = new SettingsModel();
-           // model.PropertyChanged += this.NotifyPropertyChanged;
+            model.PropertyChanged += this.OnPropertyChanged;
 
         }
         public ICommand RemoveCommand
@@ -133,7 +133,9 @@ namespace ex2_AP2
         
         private void OnRemove()
         {
-            bool result = this.model.RemoveHandler(this.selectedHandler);
+            //bool result = 
+                this.model.RemoveHandler(this.selectedHandler);
+            /*
             if (result)
             {
                 this.Handlers.Remove(this.selectedHandler);
@@ -141,11 +143,22 @@ namespace ex2_AP2
                 var command = this.RemoveCommand as DelegateCommand;
                 command.RaiseCanExecuteChanged();
             }
+            */
         }
 
         private bool CanRemove()
         {
             return this.canRemove;
+        }
+        public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName.Equals("handlers") || e.PropertyName.Equals("Handlers"))
+            {
+                this.Handlers.Remove(this.selectedHandler);
+                this.canRemove = false;
+                var command = this.RemoveCommand as DelegateCommand;
+                command.RaiseCanExecuteChanged();
+            }
         }
     }
 }

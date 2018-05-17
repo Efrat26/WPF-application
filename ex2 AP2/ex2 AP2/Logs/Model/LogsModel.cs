@@ -1,4 +1,5 @@
 ﻿using ex2_AP2.Settings.Client;
+using ImageService.Commands;
 using ImageService.ImageService.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,15 @@ namespace ex2_AP2.Logs.Model
         {
             connectionSuccessful = false;
             client = new GuiClient();
-            /*
+            
             client.connect("127.0.0.1", 8000);
             if (client.isConnected())
             {
                 connectionSuccessful = true;
+                client.write(((int)Command_Enum.CommandEnum.LogCommand).ToString());
                 this.Listen();
             }
-            */
+            
         }
         public void Listen()
         {
@@ -40,7 +42,7 @@ namespace ex2_AP2.Logs.Model
                 while (!stop)
                 {
                     string commandLine = client.read();
-                    Console.WriteLine(commandLine);
+                    Console.WriteLine("in logs view model, got: "+commandLine);
                 }
             });
             task.Start();

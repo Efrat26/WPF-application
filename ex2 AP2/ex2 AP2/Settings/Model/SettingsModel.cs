@@ -32,30 +32,32 @@ namespace ex2_AP2
             if (client.isConnected())
             {
                 connectionSuccessful = true;
-            }
-            String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
-            //set the inital configurations
-            String answer = null;
-            if (client != null)
-            {
-                client.write(appConfigCommand);
-                 answer = client.read();
-            }
-            if (!answer.Equals(ResultMessgeEnum.Fail))
-            {
-                ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
-                this.OutputDirectory = initialConfig.OutputFolder;
-                this.LogName = initialConfig.LogName;
-                this.sourceName = initialConfig.SourceName;
-                this.thumbnailSize = initialConfig.ThumbnailSize;
-                string[] folders = initialConfig.Handlers.Split(';');
-                foreach (String folder in folders)
+
+                String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
+                //set the inital configurations
+                String answer = null;
+                if (client != null)
                 {
-                    this.handlers.Add(folder);
+                    client.write(appConfigCommand);
+                    answer = client.read();
+                }
+                if (!answer.Equals(ResultMessgeEnum.Fail))
+                {
+                    ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
+                    this.OutputDirectory = initialConfig.OutputFolder;
+                    this.LogName = initialConfig.LogName;
+                    this.sourceName = initialConfig.SourceName;
+                    this.thumbnailSize = initialConfig.ThumbnailSize;
+                    string[] folders = initialConfig.Handlers.Split(';');
+                    foreach (String folder in folders)
+                    {
+                        this.handlers.Add(folder);
+                    }
                 }
             }
         }
-        public string OutputDirectory {
+        public string OutputDirectory
+        {
             get
             {
                 return this.outputDirectoryPath;
@@ -79,7 +81,8 @@ namespace ex2_AP2
                 NotifyPropertyChanged("SourceName");
             }
         }
-        public string LogName {
+        public string LogName
+        {
             get
             {
                 return this.logName;
@@ -90,7 +93,8 @@ namespace ex2_AP2
                 NotifyPropertyChanged("LogName");
             }
         }
-        public int ThumbnailSize {
+        public int ThumbnailSize
+        {
             get
             {
                 return this.thumbnailSize;
@@ -117,23 +121,46 @@ namespace ex2_AP2
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-        public bool RemoveHandler(String path)
+        public void RemoveHandler(String path)
         {
             HandlerToClose h = new HandlerToClose(path);
             String jobject = h.ToJSON();
             int message = (int)CommandEnum.CloseHandler;
-            client.write(message.ToString());
-            this.client.write(jobject);
-            string result = client.read();
-            if (result.Equals(ResultMessgeEnum.Success.ToString()))
+
+            Task task = new Task(() =>
             {
-                this.handlers.Remove(path);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+               // while (!stop)
+                //{
+                    String newMessage = message.ToString() + jobject;
+                    client.write(newMessage);
+                    //this.client.write(jobject);
+                    string result = client.read();
+                    Console.WriteLine(result);
+                    if (result.Equals(ResultMessgeEnum.Success.ToString()))
+                    {
+                        Console.WriteLine("in settings model, got: " + result + ". removing handler now");
+                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    {
+                        this.handlers.Remove(path);
+                    });
+                        NotifyPropertyChanged("Handlers");
+                    //stop = true;
+                    //  res= true;
+                }
+                    else
+                    {
+                    //Task.Delay(1000);
+                    //return false;
+                    // }
+                    //res= false;
+                }
+               
+            });
+            task.Start();
+            Console.WriteLine("in settings model after returning result");
+           // return res;
+
         }
     }
 }
+
