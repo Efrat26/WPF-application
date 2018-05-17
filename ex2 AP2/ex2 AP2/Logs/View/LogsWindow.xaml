@@ -19,10 +19,10 @@
 
         <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Type" Width="1*" IsReadOnly="True">
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Message" Width="3*" IsReadOnly="True">
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Type" Width="1*" IsReadOnly="True" Binding="{Binding Type}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Message" Width="3*" IsReadOnly="True" Binding="{Binding Message}">
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
