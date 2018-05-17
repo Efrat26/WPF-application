@@ -13,13 +13,21 @@
             <Setter Property="TextBlock.FontStyle" Value="Italic"/>
             <Setter Property="TextBlock.Foreground" Value="OliveDrab"/>
         </Style>
+        <local:LogConventer x:Key="logs_background"/>
     </UserControl.Resources>
+    
     <StackPanel>
         <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center"/>
 
         <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" Width="1*" IsReadOnly="True" Binding="{Binding Type}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background"
+                            Value="{Binding Type, Converter={StaticResource logs_background}}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Message" Width="3*" IsReadOnly="True" Binding="{Binding Message}">
                 </DataGridTextColumn>

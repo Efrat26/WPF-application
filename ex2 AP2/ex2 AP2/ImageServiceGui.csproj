@@ -61,6 +61,7 @@
     <Compile Include="Logs\Model\ILogsModel.cs" />
     <Compile Include="Logs\Model\LogsModel.cs" />
     <Compile Include="Logs\ViewModel\LogsViewModel.cs" />
+    <Compile Include="Logs\View\LogConverter.cs" />
     <Compile Include="Logs\View\LogsWindow.xaml.cs">
       <DependentUpon>LogsWindow.xaml</DependentUpon>
     </Compile>
