@@ -21,5 +21,7 @@ namespace Logs.Server
         event EventHandler<CommandRecievedEventArgs> CommandRecieved;
         void OnMessage(object sender, MessageRecievedEventArgs e);
         event EventHandler<MessageRecievedEventArgs> LogMessageRecieved;
+        String IP { get; set; }
+        int Port { get; set; }
     }
 }

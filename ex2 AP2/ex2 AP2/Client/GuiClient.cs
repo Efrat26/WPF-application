@@ -11,7 +11,7 @@ namespace ex2_AP2.Settings.Client
 {
     public class GuiClient : IClient
     {
-
+        private bool connected;
         private IPEndPoint ep;
         private TcpClient client;
         private NetworkStream stream;
@@ -32,10 +32,13 @@ namespace ex2_AP2.Settings.Client
         {
             if (client.Connected)
             {
+                this.connected = true;
                 return true;
             }
+            this.connected = false;
             return false;
         }
+        public bool IsConnected { get { return this.connected; } set { } }
         public void disconnect()
         {
             writer.Close();

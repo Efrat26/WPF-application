@@ -13,5 +13,6 @@ namespace ex2_AP2.Settings.Client
         String read();  // blocking call
         void disconnect();
         bool isConnected();
+        bool IsConnected{ get; set; }
     }
 }
