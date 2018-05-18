@@ -17,4 +17,6 @@ namespace Infrastructure.Enums
         CloseCommand,
         CloseHandler
     }
+
+   
 }

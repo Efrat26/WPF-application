@@ -88,8 +88,10 @@ namespace ex2_AP2.Settings.Client
             //if (!client.Connected) { client.Connect(ep); }
             try
             {
+      
                 // Send data to server
                 writer.Write(command);
+                writer.Flush();
             }
             catch (Exception e)
             {

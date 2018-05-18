@@ -126,7 +126,6 @@ namespace ex2_AP2
             HandlerToClose h = new HandlerToClose(path);
             String jobject = h.ToJSON();
             int message = (int)CommandEnum.CloseHandler;
-
             Task task = new Task(() =>
             {
                // while (!stop)
@@ -134,7 +133,7 @@ namespace ex2_AP2
                     String newMessage = message.ToString() + jobject;
                     client.write(newMessage);
                     //this.client.write(jobject);
-                    string result = client.read();
+                     string result = client.read();
                     Console.WriteLine(result);
                     if (result.Equals(ResultMessgeEnum.Success.ToString()))
                     {
@@ -149,15 +148,16 @@ namespace ex2_AP2
                 }
                     else
                     {
+                    Console.WriteLine("something went wrong in removing handler");
                     //Task.Delay(1000);
                     //return false;
                     // }
                     //res= false;
                 }
-               
             });
             task.Start();
-            Console.WriteLine("in settings model after returning result");
+           // taskRes = task.Result;
+           // Console.WriteLine("in settings model after returning result, result is: " + taskRes);
            // return res;
 
         }

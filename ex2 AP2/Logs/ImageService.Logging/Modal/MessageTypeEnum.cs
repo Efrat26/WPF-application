@@ -11,8 +11,8 @@ namespace Logs.ImageService.Logging.Modal
     /// </summary>
     public enum MessageTypeEnum : int
         {
-            INFO,
-            WARNING,
-            FAIL
+            INFO = 0,
+            WARNING = 1,
+            FAIL = 2
         }
 }

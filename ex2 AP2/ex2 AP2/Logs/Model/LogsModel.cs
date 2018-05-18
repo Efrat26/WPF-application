@@ -40,6 +40,7 @@ namespace ex2_AP2.Logs.Model
                 {
                     string commandLine = client.read();
                     Console.WriteLine("in logs view model, got: "+commandLine);
+                    
                     if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()) ||
                     commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
                     {
@@ -48,6 +49,9 @@ namespace ex2_AP2.Logs.Model
                     else
                     {
                         Console.WriteLine("in logs model going to parse to json, got: " + commandLine);
+                        commandLine = commandLine.Remove(commandLine.Length - 1);
+                        commandLine = "{" + commandLine;
+                        Console.WriteLine("command line after corrections: " + commandLine);
                         LogMessage log = LogMessage.FromJSON(commandLine);
                         App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                         {
@@ -55,6 +59,7 @@ namespace ex2_AP2.Logs.Model
                             NotifyPropertyChanged("logs");
                         });
                     }
+                    Task.Delay(1000);
                 }
             });
             task.Start();
