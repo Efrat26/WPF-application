@@ -1,4 +1,5 @@
-﻿using Logs.ImageService.Logging.Modal;
+﻿using Logs.ImageService.Logging;
+using Logs.ImageService.Logging.Modal;
 using Logs.Modal.Event;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,7 @@ namespace Logs.Server
         event EventHandler<MessageRecievedEventArgs> LogMessageRecieved;
         String IP { get; set; }
         int Port { get; set; }
+        void SetLoggerService(ILoggingService l);
+        ILoggingService Log { get; set; }
     }
 }
