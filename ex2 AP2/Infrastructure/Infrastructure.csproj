@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigObjects\ImageServiceAppConfigItem.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Commands\ChangePropertyInAppConfig.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\ColseHandlerComamnd.cs" />

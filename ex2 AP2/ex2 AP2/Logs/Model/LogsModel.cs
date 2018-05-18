@@ -20,7 +20,7 @@ namespace ex2_AP2.Logs.Model
             connectionSuccessful = false;
             client = GuiClient.Instance;
             
-            client.connect("127.0.0.1", 8000);
+            client.connect(Communication.CommunicationDetails.IP, Communication.CommunicationDetails.port);
             if (client.isConnected())
             {
                 connectionSuccessful = true;

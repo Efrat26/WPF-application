@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logs.Server;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,8 +39,8 @@ namespace ex2_AP2.Settings.Client
         }
         public void connect(String IP, int port)
         {
-            //ep = new IPEndPoint(IPAddress.Parse(IP), port);
-            ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+           
+            ep = new IPEndPoint(IPAddress.Parse(IP), port);
             client = new TcpClient();
             client.Connect(ep);
             stream = client.GetStream();
