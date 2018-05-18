@@ -28,6 +28,7 @@ namespace ex2_AP2
             this.handlers = new ObservableCollection<String>();
             connectionSuccessful = false;
             client = GuiClient.Instance;
+            //client = new GuiClient();
             client.connect(Communication.CommunicationDetails.IP, Communication.CommunicationDetails.port);
             if (client.isConnected())
             {
@@ -123,39 +124,45 @@ namespace ex2_AP2
         }
         public void RemoveHandler(String path)
         {
-            HandlerToClose h = new HandlerToClose(path);
-            String jobject = h.ToJSON();
-            int message = (int)CommandEnum.CloseHandler;
+           
+            bool stop = false;
             Task task = new Task(() =>
             {
-               // while (!stop)
-                //{
-                    String newMessage = message.ToString() + jobject;
-                    client.write(newMessage);
+                HandlerToClose h = new HandlerToClose(path);
+                String jobject = h.ToJSON();
+                int message = (int)CommandEnum.CloseHandler;
+                String newMessage = message.ToString() + jobject;
+                client.write(newMessage);
+                while (!stop)
+                {
+                    
                     //this.client.write(jobject);
                      string result = client.read();
                     Console.WriteLine(result);
                     if (result.Equals(ResultMessgeEnum.Success.ToString()))
                     {
                         Console.WriteLine("in settings model, got: " + result + ". removing handler now");
-                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        stop = true;
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                     {
                         this.handlers.Remove(path);
                     });
                         NotifyPropertyChanged("Handlers");
+                        
                     //stop = true;
                     //  res= true;
-                }
+                    }
                     else
                     {
                     Console.WriteLine("something went wrong in removing handler");
-                    //Task.Delay(1000);
+                   // Task.Delay(1000);
                     //return false;
-                    // }
+                    }
                     //res= false;
                 }
             });
             task.Start();
+            //task.Wait();
            // taskRes = task.Result;
            // Console.WriteLine("in settings model after returning result, result is: " + taskRes);
            // return res;

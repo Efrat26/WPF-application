@@ -58,7 +58,7 @@ namespace ex2_AP2.Settings.Client
             this.connected = false;
             return false;
         }
-        public bool IsConnected { get { return this.connected; } set { } }
+        public bool IsConnected { get { return this.connected; } set {this.connected= value;} }
         public void disconnect()
         {
             writer.Close();
@@ -73,6 +73,14 @@ namespace ex2_AP2.Settings.Client
             try
             {
                 // Get result from server
+                bool innerStop = false;
+                while (!innerStop)
+                {
+                    if (stream.DataAvailable)
+                    {
+                        innerStop = true;
+                    }
+                }
                 result = reader.ReadString();
                 return result;
             }
