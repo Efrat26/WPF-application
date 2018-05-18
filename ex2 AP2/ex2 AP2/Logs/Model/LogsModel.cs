@@ -38,7 +38,7 @@ namespace ex2_AP2.Logs.Model
             {
                 while (!stop)
                 {
-
+                    Task.Delay(4000);
                     string commandLine = client.read();
                     Console.WriteLine("in logs view model, got: "+commandLine);
                     
