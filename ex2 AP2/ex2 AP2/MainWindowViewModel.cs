@@ -15,6 +15,13 @@ namespace ex2_AP2
         public MainWindowViewModel()
         {
             this.connected = false;
+           // client =new GuiClient();
+            client = GuiClient.Instance;
+            client.connect(Communication.CommunicationDetails.IP, Communication.CommunicationDetails.port);
+            if (client.IsConnected)
+            {
+                this.connected = true;
+            }
         }
     }
 }

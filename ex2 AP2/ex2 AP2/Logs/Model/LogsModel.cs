@@ -19,16 +19,27 @@ namespace ex2_AP2.Logs.Model
             this.logs = new ObservableCollection<LogMessage>();
             connectionSuccessful = false;
             client = GuiClient.Instance;
-            
-            client.connect(Communication.CommunicationDetails.IP, Communication.CommunicationDetails.port);
-            if (client.isConnected())
+            bool innerstop = false;
+            Task task = new Task(() =>
             {
-                connectionSuccessful = true;
-                String msg = ((int)Infrastructure.Enums.CommandEnum.LogCommand).ToString();
-                Console.WriteLine("in logs modedl, sending: " + msg);
-                client.write(msg);
-                this.Listen();
-            }
+                while (!innerstop)
+                {
+                    if (client != null && client.IsConnected)
+                    {
+                        innerstop = true;
+                        Console.WriteLine("in logs model client != null");
+                    }
+                }
+                if (client.isConnected())
+                {
+                    Task.Delay(4000);
+                    connectionSuccessful = true;
+                   // String msg = ((int)Infrastructure.Enums.CommandEnum.LogCommand).ToString();
+                   // Console.WriteLine("in logs modedl, sending: " + msg);
+                    //client.write(msg);
+                    this.Listen();
+                }
+            });task.Start();
             
         }
         public void Listen()

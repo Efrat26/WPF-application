@@ -10,11 +10,13 @@ using Logs.AppConfigObjects;
 using Infrastructure.Enums;
 using Logs.Controller.Handlers;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace ex2_AP2
 {
     class SettingsModel : ISettingsModel, INotifyPropertyChanged
     {
+        private static Mutex mut = new Mutex();
         #region members
         public event PropertyChangedEventHandler PropertyChanged;
         private IClient client;
@@ -96,15 +98,25 @@ namespace ex2_AP2
             this.configSet = false;
             this.handlers = new ObservableCollection<String>();
             connectionSuccessful = false;
+            bool innerstop = false;
             client = GuiClient.Instance;
-            //client = new GuiClient();
-            client.connect(Communication.CommunicationDetails.IP, Communication.CommunicationDetails.port);
-            if (client.isConnected())
+            Task task = new Task(() =>
             {
-                connectionSuccessful = true;
-                this.Listen();
- 
-            }
+                while (!innerstop)
+                {
+                    if (client != null && client.IsConnected)
+                    {
+                        innerstop = true;
+                        Console.WriteLine("in settings model client != null");
+                    }
+                }
+                if (client.isConnected())
+                {
+                    connectionSuccessful = true;
+                    this.Listen();
+
+                }
+            });task.Start();
         }
         public void Listen()
         {
@@ -118,7 +130,8 @@ namespace ex2_AP2
                     String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
                     client.write(appConfigCommand);
                     //Task.Delay(1000);
-                     commandLine = client.read();
+                    commandLine = client.read();
+
                 }
                 while (!stop)
                 {
@@ -127,14 +140,16 @@ namespace ex2_AP2
 
                     if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()))
                     {
-
-                        Console.WriteLine("in settings model, got: " + commandLine + ". removing handler now");
-                        stop = true;
-                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        if (this.handlerToClose != null)
                         {
-                            this.handlers.Remove(this.handlerToClose);
-                        });
-                        NotifyPropertyChanged("Handlers");
+                            Console.WriteLine("in settings model, got: " + commandLine + ". removing handler now");
+                            stop = true;
+                            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                            {
+                                this.handlers.Remove(this.handlerToClose);
+                            });
+                            NotifyPropertyChanged("Handlers");
+                        }
                     }
                     else if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
                     {
@@ -143,20 +158,30 @@ namespace ex2_AP2
                     else if(this.configSet == false && commandLine!=null)
                     {
                         ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(commandLine);
-                        
-                         this.OutputDirectory = initialConfig.OutputFolder;
-                        this.LogName = initialConfig.LogName;
-                        this.sourceName = initialConfig.SourceName;
-                        this.thumbnailSize = initialConfig.ThumbnailSize;
-                        string[] folders = initialConfig.Handlers.Split(';');
-                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        if (initialConfig != null && !this.configSet)
                         {
-                            foreach (String folder in folders)
-                        {
-                            this.handlers.Add(folder);
+                            mut.WaitOne();
+                            this.configSet = true;
+                            
+                            Console.WriteLine(initialConfig.OutputFolder);
+                            this.OutputDirectory = initialConfig.OutputFolder;
+                            Console.WriteLine(initialConfig.LogName);
+                            this.LogName = initialConfig.LogName;
+                            Console.WriteLine(initialConfig.SourceName);
+                            this.SourceName = initialConfig.SourceName;
+                            Console.WriteLine(initialConfig.ThumbnailSize);
+                            this.ThumbnailSize = initialConfig.ThumbnailSize;
+                            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                            {
+                                string[] folders = initialConfig.Handlers.Split(';');
+                            
+                                foreach (String folder in folders)
+                                {
+                                    this.handlers.Add(folder);
+                                }
+                            });
+                            mut.ReleaseMutex();  
                         }
-                        });
-                        this.configSet = true;
                     }
                     else
                     {

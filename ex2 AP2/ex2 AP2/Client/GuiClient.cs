@@ -46,16 +46,22 @@ namespace ex2_AP2.Settings.Client
             stream = client.GetStream();
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
-            Console.WriteLine("You are connected");
+            if (client.Connected)
+            {
+                this.IsConnected = true;
+                Console.WriteLine("You are connected");
+                Console.WriteLine("IsConnected: " + IsConnected);
+            }
         }
         public bool isConnected()
         {
-            if (client.Connected)
+            if (client != null && client.Connected)
             {
-                this.connected = true;
+                this.IsConnected = true;
+                Console.WriteLine("in isconnected IsConnected: " + IsConnected);
                 return true;
             }
-            this.connected = false;
+            this.IsConnected = false;
             return false;
         }
         public bool IsConnected { get { return this.connected; } set {this.connected= value;} }
@@ -72,15 +78,7 @@ namespace ex2_AP2.Settings.Client
             String result;
             try
             {
-                // Get result from server
-                bool innerStop = false;
-                while (!innerStop)
-                {
-                    if (stream.DataAvailable)
-                    {
-                        innerStop = true;
-                    }
-                }
+
                 result = reader.ReadString();
                 return result;
             }

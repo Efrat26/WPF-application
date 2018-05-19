@@ -159,6 +159,10 @@ namespace ex2_AP2
                 var command = this.RemoveCommand as DelegateCommand;
                 command.RaiseCanExecuteChanged();
             }
+            else
+            {
+               this.NotifyPropertyChanged(e.PropertyName);
+            }
         }
     }
 }

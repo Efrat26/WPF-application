@@ -53,12 +53,19 @@ namespace Logs.AppConfigObjects
         public static ImageServiceAppConfigItem FromJSON(string str)
         {
             ImageServiceAppConfigItem appconf = new ImageServiceAppConfigItem(null,null,null,null,0);
-            JObject appconfItem = JObject.Parse(str);
-            appconf.outputFolder = (string)appconfItem["output"];
-            appconf.sourceName = (string)appconfItem["source"];
-            appconf.logName = (string)appconfItem["log"];
-            appconf.handlers = (string)appconfItem["handlers"];
-            appconf.thumbnailSize = (int)appconfItem["size"];
+            try
+            {
+                JObject appconfItem = JObject.Parse(str);
+                appconf.outputFolder = (string)appconfItem["output"];
+                appconf.sourceName = (string)appconfItem["source"];
+                appconf.logName = (string)appconfItem["log"];
+                appconf.handlers = (string)appconfItem["handlers"];
+                appconf.thumbnailSize = (int)appconfItem["size"];
+            } catch (Exception)
+            {
+                Console.WriteLine("could not parse app conf item");
+                return null;
+            }
             return appconf;
             
            // return JsonConvert.DeserializeObject<ImageServiceAppConfigItem>(str);
