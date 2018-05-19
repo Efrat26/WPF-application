@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ex2_AP2.Settings.Client
 {
+    public delegate String MessageRecieved(String message);
     public interface IClient
     {
         void connect(String ip, int port);
@@ -14,5 +15,7 @@ namespace ex2_AP2.Settings.Client
         void disconnect();
         bool isConnected();
         bool IsConnected{ get; set; }
+        void Listen();
+        event MessageRecieved GotMessage;
     }
 }

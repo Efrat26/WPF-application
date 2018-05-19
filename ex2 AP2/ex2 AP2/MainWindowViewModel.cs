@@ -21,6 +21,7 @@ namespace ex2_AP2
             if (client.IsConnected)
             {
                 this.connected = true;
+                client.Listen();
             }
         }
     }

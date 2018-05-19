@@ -20,6 +20,7 @@ namespace ex2_AP2.Logs.Model
             connectionSuccessful = false;
             client = GuiClient.Instance;
             bool innerstop = false;
+            
             Task task = new Task(() =>
             {
                 while (!innerstop)
@@ -32,49 +33,16 @@ namespace ex2_AP2.Logs.Model
                 }
                 if (client.isConnected())
                 {
-                    Task.Delay(4000);
+                   // Task.Delay(4000);
                     connectionSuccessful = true;
+                    this.client.GotMessage += this.GotMeesage;
                    // String msg = ((int)Infrastructure.Enums.CommandEnum.LogCommand).ToString();
                    // Console.WriteLine("in logs modedl, sending: " + msg);
                     //client.write(msg);
-                    this.Listen();
+                    //this.Listen();
                 }
             });task.Start();
             
-        }
-        public void Listen()
-        {
-            Boolean stop = false;
-            Task task = new Task(() =>
-            {
-                while (!stop)
-                {
-                    Task.Delay(4000);
-                    string commandLine = client.read();
-                    Console.WriteLine("in logs view model, got: "+commandLine);
-                    
-                    if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()) ||
-                    commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
-                    {
-                        Console.WriteLine("in logs model, got: " + commandLine);
-                    }
-                    else
-                    {
-                        Console.WriteLine("in logs model going to parse to json, got: " + commandLine);
-                        commandLine = commandLine.Remove(commandLine.Length - 1);
-                        commandLine = "{" + commandLine;
-                        Console.WriteLine("command line after corrections: " + commandLine);
-                        LogMessage log = LogMessage.FromJSON(commandLine);
-                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                        {
-                            this.logs.Add(log);
-                            NotifyPropertyChanged("logs");
-                        });
-                    }
-                    Task.Delay(1000);
-                }
-            });
-            task.Start();
         }
         private void AddLog(String logAsString)
         {
@@ -83,6 +51,31 @@ namespace ex2_AP2.Logs.Model
         public void NotifyPropertyChanged(string propName)
         {
             
+        }
+
+        public string GotMeesage(string message)
+        {
+            Console.WriteLine("in logs view model, got: " + message);
+
+            if (message.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()) ||
+            message.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
+            {
+                Console.WriteLine("in logs model, got: " + message);
+            }
+            else
+            {
+               // Console.WriteLine("in logs model going to parse to json, got: " + message);
+               // message = message.Remove(message.Length - 1);
+                //message = "{" + message;
+               // Console.WriteLine("command line after corrections: " + message);
+                LogMessage log = LogMessage.FromJSON(message);
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    this.logs.Add(log);
+                    NotifyPropertyChanged("logs");
+                });
+            }
+            return null;
         }
     }
 }

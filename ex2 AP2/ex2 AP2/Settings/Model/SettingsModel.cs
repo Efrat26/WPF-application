@@ -112,85 +112,17 @@ namespace ex2_AP2
                 }
                 if (client.isConnected())
                 {
+                    client.GotMessage += this.GotMeesage;
                     connectionSuccessful = true;
-                    this.Listen();
+                    //while (!configSet)
+                    //{
+                        String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
+                        client.write(appConfigCommand);
+                        Task.Delay(1000);
 
+                    //}
                 }
             });task.Start();
-        }
-        public void Listen()
-        {
-            Boolean stop = false;
-            Task task = new Task(() =>
-            {
-                string commandLine = null;
-                if (configSet == false && this.connectionSuccessful)
-                {
-                    
-                    String appConfigCommand = ((int)CommandEnum.GetConfigCommand).ToString();
-                    client.write(appConfigCommand);
-                    //Task.Delay(1000);
-                    commandLine = client.read();
-
-                }
-                while (!stop)
-                {
-                    
-                    Console.WriteLine("in settings view model, got: " + commandLine);
-
-                    if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()))
-                    {
-                        if (this.handlerToClose != null)
-                        {
-                            Console.WriteLine("in settings model, got: " + commandLine + ". removing handler now");
-                            stop = true;
-                            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                            {
-                                this.handlers.Remove(this.handlerToClose);
-                            });
-                            NotifyPropertyChanged("Handlers");
-                        }
-                    }
-                    else if (commandLine.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
-                    {
-
-                    }
-                    else if(this.configSet == false && commandLine!=null)
-                    {
-                        ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(commandLine);
-                        if (initialConfig != null && !this.configSet)
-                        {
-                            mut.WaitOne();
-                            this.configSet = true;
-                            
-                            Console.WriteLine(initialConfig.OutputFolder);
-                            this.OutputDirectory = initialConfig.OutputFolder;
-                            Console.WriteLine(initialConfig.LogName);
-                            this.LogName = initialConfig.LogName;
-                            Console.WriteLine(initialConfig.SourceName);
-                            this.SourceName = initialConfig.SourceName;
-                            Console.WriteLine(initialConfig.ThumbnailSize);
-                            this.ThumbnailSize = initialConfig.ThumbnailSize;
-                            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                            {
-                                string[] folders = initialConfig.Handlers.Split(';');
-                            
-                                foreach (String folder in folders)
-                                {
-                                    this.handlers.Add(folder);
-                                }
-                            });
-                            mut.ReleaseMutex();  
-                        }
-                    }
-                    else
-                    {
-
-                    }
-                   commandLine = client.read();
-                    // Task.Delay(1000);
-                }
-            }); task.Start();
         }
         public void NotifyPropertyChanged(String propName)
         {
@@ -208,6 +140,63 @@ namespace ex2_AP2
             String newMessage = message.ToString() + jobject;
             client.write(newMessage);
             //this.Listen();
+        }
+
+        public string GotMeesage(string message)
+        {
+            Console.WriteLine("in settings view model, got: " + message);
+
+            if (message.Equals(Infrastructure.Enums.ResultMessgeEnum.Success.ToString())
+            || message.Contains(Infrastructure.Enums.ResultMessgeEnum.Success.ToString()))
+            {
+                if (this.handlerToClose != null)
+                {
+                    Console.WriteLine("in settings model, got: " + message + ". removing handler now");
+                    //stop = true;
+                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    {
+                        this.handlers.Remove(this.handlerToClose);
+                    });
+                    NotifyPropertyChanged("Handlers");
+                }
+            }
+            else if (message.Equals(Infrastructure.Enums.ResultMessgeEnum.Fail.ToString()))
+            {
+
+            }
+            else if (this.configSet == false && message != null)
+            {
+                ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(message);
+                if (initialConfig != null && !this.configSet)
+                {
+                    mut.WaitOne();
+                    this.configSet = true;
+
+                    Console.WriteLine(initialConfig.OutputFolder);
+                    this.OutputDirectory = initialConfig.OutputFolder;
+                    Console.WriteLine(initialConfig.LogName);
+                    this.LogName = initialConfig.LogName;
+                    Console.WriteLine(initialConfig.SourceName);
+                    this.SourceName = initialConfig.SourceName;
+                    Console.WriteLine(initialConfig.ThumbnailSize);
+                    this.ThumbnailSize = initialConfig.ThumbnailSize;
+                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    {
+                        string[] folders = initialConfig.Handlers.Split(';');
+
+                        foreach (String folder in folders)
+                        {
+                            this.handlers.Add(folder);
+                        }
+                    });
+                    mut.ReleaseMutex();
+                }
+            }
+            else
+            {
+
+            }
+            return null;
         }
     }
 }

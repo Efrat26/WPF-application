@@ -21,6 +21,9 @@ namespace ex2_AP2.Settings.Client
 
         private static volatile GuiClient instance;
         private static object syncRoot = new Object();
+
+        public event MessageRecieved GotMessage;
+
         public static GuiClient Instance
         {
             get
@@ -110,6 +113,24 @@ namespace ex2_AP2.Settings.Client
                 //writer.Close();
             }
 
+        }
+
+        public void Listen()
+        {
+            Boolean stop = false;
+            String message;
+            Task task = new Task(() =>
+            {
+                while (!stop)
+                {
+                    message = this.read();
+                    if (message != null)
+                    {
+                        this.GotMessage?.Invoke(message);
+                    }
+                }
+
+            });task.Start();
         }
     }
 }

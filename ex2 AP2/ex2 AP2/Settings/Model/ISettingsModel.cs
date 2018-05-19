@@ -19,6 +19,7 @@ namespace ex2_AP2
         int ThumbnailSize { get; set; }
         void NotifyPropertyChanged(String propName);
         void RemoveHandler(String path);
+        String GotMeesage(String message);
         //void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
     }
 }

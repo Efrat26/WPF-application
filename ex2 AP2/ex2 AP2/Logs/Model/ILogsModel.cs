@@ -13,5 +13,6 @@ namespace ex2_AP2.Logs.Model
         event PropertyChangedEventHandler PropertyChanged;
         ObservableCollection<LogMessage> Logs { get; set; }
         void NotifyPropertyChanged(String propName);
+        String GotMeesage(String message);
     }
 }
