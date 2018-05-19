@@ -45,15 +45,22 @@ namespace ex2_AP2.Settings.Client
            
             ep = new IPEndPoint(IPAddress.Parse(IP), port);
             client = new TcpClient();
-            client.Connect(ep);
-            stream = client.GetStream();
-            reader = new BinaryReader(stream);
-            writer = new BinaryWriter(stream);
-            if (client.Connected)
+            try
             {
-                this.IsConnected = true;
-                Console.WriteLine("You are connected");
-                Console.WriteLine("IsConnected: " + IsConnected);
+                client.Connect(ep);
+                stream = client.GetStream();
+                reader = new BinaryReader(stream);
+                writer = new BinaryWriter(stream);
+                if (client.Connected)
+                {
+                    this.IsConnected = true;
+                    Console.WriteLine("You are connected");
+                    Console.WriteLine("IsConnected: " + IsConnected);
+                }
+            }
+            catch (Exception)
+            {
+                this.IsConnected = false;
             }
         }
         public bool isConnected()

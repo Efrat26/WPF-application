@@ -142,7 +142,7 @@ namespace ex2_AP2
             //this.Listen();
         }
 
-        public string GotMeesage(string message)
+        public void GotMeesage(string message)
         {
             Console.WriteLine("in settings view model, got: " + message);
 
@@ -196,7 +196,6 @@ namespace ex2_AP2
             {
 
             }
-            return null;
         }
     }
 }

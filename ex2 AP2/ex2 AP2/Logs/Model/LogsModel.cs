@@ -33,13 +33,8 @@ namespace ex2_AP2.Logs.Model
                 }
                 if (client.isConnected())
                 {
-                   // Task.Delay(4000);
                     connectionSuccessful = true;
                     this.client.GotMessage += this.GotMeesage;
-                   // String msg = ((int)Infrastructure.Enums.CommandEnum.LogCommand).ToString();
-                   // Console.WriteLine("in logs modedl, sending: " + msg);
-                    //client.write(msg);
-                    //this.Listen();
                 }
             });task.Start();
             
@@ -53,7 +48,7 @@ namespace ex2_AP2.Logs.Model
             
         }
 
-        public string GotMeesage(string message)
+        public void GotMeesage(string message)
         {
             Console.WriteLine("in logs view model, got: " + message);
 
@@ -64,10 +59,6 @@ namespace ex2_AP2.Logs.Model
             }
             else
             {
-               // Console.WriteLine("in logs model going to parse to json, got: " + message);
-               // message = message.Remove(message.Length - 1);
-                //message = "{" + message;
-               // Console.WriteLine("command line after corrections: " + message);
                 LogMessage log = LogMessage.FromJSON(message);
                 App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
                 {
@@ -75,7 +66,6 @@ namespace ex2_AP2.Logs.Model
                     NotifyPropertyChanged("logs");
                 });
             }
-            return null;
         }
     }
 }

@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BackgroundConventer.cs" />
     <Compile Include="Logs\Model\ILogsModel.cs" />
     <Compile Include="Logs\Model\LogsModel.cs" />
     <Compile Include="Logs\ViewModel\LogsViewModel.cs" />
