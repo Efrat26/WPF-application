@@ -16,9 +16,5 @@ namespace ex2_AP2
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-        //public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //  NotifyPropertyChanged(e.PropertyName);
-        // }
     }
 }
