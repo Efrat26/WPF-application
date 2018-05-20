@@ -7,20 +7,41 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 namespace ex2_AP2.Logs.Model
 {
+    /// <summary>
+    ///  a log model - handles the logic for the log tab
+    /// </summary>
+    /// <seealso cref="ex2_AP2.Logs.Model.ILogsModel" />
     public class LogsModel : ILogsModel
     {
+        #region members        
+        /// <summary>
+        /// The logs
+        /// </summary>
         private ObservableCollection<LogMessage> logs;
-        public ObservableCollection<LogMessage> Logs { get {return this.logs; } set { } }
+        /// <summary>
+        /// The client
+        /// </summary>
         private IClient client;
+        /// <summary>
+        /// determines if the  connection successful
+        /// </summary>
         private Boolean connectionSuccessful;
+        #endregion members
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        public ObservableCollection<LogMessage> Logs { get { return this.logs; } set { } }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogsModel"/> class.
+        /// </summary>
         public LogsModel()
         {
             this.logs = new ObservableCollection<LogMessage>();
             connectionSuccessful = false;
             client = GuiClient.Instance;
             bool innerstop = false;
-            
+            ///loop until the client is connected
             Task task = new Task(() =>
             {
                 while (!innerstop)
@@ -31,23 +52,19 @@ namespace ex2_AP2.Logs.Model
                         Console.WriteLine("in logs model client != null");
                     }
                 }
+                //if client is connected - register to the event of got a message
                 if (client.isConnected())
                 {
                     connectionSuccessful = true;
                     this.client.GotMessage += this.GotMeesage;
                 }
-            });task.Start();
-            
-        }
-        private void AddLog(String logAsString)
-        {
+            }); task.Start();
 
         }
-        public void NotifyPropertyChanged(string propName)
-        {
-            
-        }
-
+        /// <summary>
+        /// determines what to do when got a meesage.
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void GotMeesage(string message)
         {
             Console.WriteLine("in logs view model, got: " + message);
@@ -67,5 +84,22 @@ namespace ex2_AP2.Logs.Model
                 });
             }
         }
+        /// <summary>
+        /// Adds the log.
+        /// </summary>
+        /// <param name="logAsString">The log as string.</param>
+        private void AddLog(String logAsString)
+        {
+
+        }
+        /// <summary>
+        /// Notifies the property changed.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
+        public void NotifyPropertyChanged(string propName)
+        {
+
+        }
+
     }
 }

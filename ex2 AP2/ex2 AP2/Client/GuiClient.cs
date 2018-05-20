@@ -10,15 +10,40 @@ using System.Threading.Tasks;
 
 namespace ex2_AP2.Settings.Client
 {
+    /// <summary>
+    /// a gui client - singleton
+    /// </summary>
+    /// <seealso cref="ex2_AP2.Settings.Client.IClient" />
     public sealed class GuiClient : IClient
     {
+        #region members        
+        /// <summary>
+        /// determines if client is connected or not
+        /// </summary>
         private bool connected;
+        /// <summary>
+        /// The end point for connection
+        /// </summary>
         private IPEndPoint ep;
+        /// <summary>
+        /// The tcp client that actually works with the server
+        /// </summary>
         private TcpClient client;
+        /// <summary>
+        /// The stream
+        /// </summary>
         private NetworkStream stream;
+        /// <summary>
+        /// The reader stream
+        /// </summary>
         private BinaryReader reader;
+        /// <summary>
+        /// The writer stream
+        /// </summary>
         private BinaryWriter writer;
-
+        /// <summary>
+        /// The instance (singleton)
+        /// </summary>
         private static volatile GuiClient instance;
         private static object syncRoot = new Object();
 
@@ -40,6 +65,12 @@ namespace ex2_AP2.Settings.Client
                 return instance;
             }
         }
+        #endregion members        
+        /// <summary>
+        /// Connects the specified ip.
+        /// </summary>
+        /// <param name="IP">The ip.</param>
+        /// <param name="port">The port.</param>
         public void connect(String IP, int port)
         {
            
@@ -63,6 +94,12 @@ namespace ex2_AP2.Settings.Client
                 this.IsConnected = false;
             }
         }
+        /// <summary>
+        /// Determines whether client is connected.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if client is connected; otherwise, <c>false</c>.
+        /// </returns>
         public bool isConnected()
         {
             if (client != null && client.Connected)
@@ -74,7 +111,16 @@ namespace ex2_AP2.Settings.Client
             this.IsConnected = false;
             return false;
         }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is connected.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is connected; otherwise, <c>false</c>.
+        /// </value>
         public bool IsConnected { get { return this.connected; } set {this.connected= value;} }
+        /// <summary>
+        /// Disconnects client.
+        /// </summary>
         public void disconnect()
         {
             writer.Close();
@@ -82,7 +128,12 @@ namespace ex2_AP2.Settings.Client
             stream.Close();
             client.Close();
         }
-
+        /// <summary>
+        /// Reads data.
+        /// </summary>
+        /// <returns>
+        /// the data read
+        /// </returns>
         public String read()
         {
             String result;
@@ -99,7 +150,10 @@ namespace ex2_AP2.Settings.Client
 
             return null;
         }
-
+        /// <summary>
+        /// Writes the specified command.
+        /// </summary>
+        /// <param name="command">The command.</param>
         public void write(String command)
         {
             //if (!client.Connected) { client.Connect(ep); }
@@ -121,7 +175,9 @@ namespace ex2_AP2.Settings.Client
             }
 
         }
-
+        /// <summary>
+        /// Listens to incoming messages.
+        /// </summary>
         public void Listen()
         {
             Boolean stop = false;

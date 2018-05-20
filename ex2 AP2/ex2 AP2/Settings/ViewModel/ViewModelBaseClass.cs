@@ -8,6 +8,10 @@ using System.Windows;
 
 namespace ex2_AP2
 {
+    /// <summary>
+    /// a view model abstract class (implemts the notify property changed)
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public abstract class ViewModelBaseClass : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

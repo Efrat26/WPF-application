@@ -14,18 +14,49 @@ using System.Threading;
 
 namespace ex2_AP2
 {
+    /// <summary>
+    /// the settings model instance
+    /// </summary>
+    /// <seealso cref="ex2_AP2.ISettingsModel" />
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     class SettingsModel : ISettingsModel, INotifyPropertyChanged
     {
+        #region members        
+        /// <summary>
+        /// a mutex to lock the writer
+        /// </summary>
         private static Mutex mut = new Mutex();
-        #region members
-        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// The client
+        /// </summary>
         private IClient client;
+        /// <summary>
+        /// The output directory path
+        /// </summary>
         private String outputDirectoryPath;
+        /// <summary>
+        /// The source name
+        /// </summary>
         private String sourceName;
+        /// <summary>
+        /// The log name
+        /// </summary>
         private String logName;
+        /// <summary>
+        /// The thumbnail size
+        /// </summary>
         private int thumbnailSize;
+        /// <summary>
+        /// determones if the connection done successful
+        /// </summary>
         private Boolean connectionSuccessful;
+        /// <summary>
+        /// The handler to close
+        /// </summary>
         private String handlerToClose;
+        /// <summary>
+        /// The handlers
+        /// </summary>
         ObservableCollection<String> handlers;
         private bool configSet;
         #endregion
@@ -93,6 +124,13 @@ namespace ex2_AP2
         }
 
         #endregion
+        /// <summary>
+        /// Occurs when a property changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingsModel"/> class.
+        /// </summary>
         public SettingsModel()
         {
             this.configSet = false;
@@ -102,6 +140,7 @@ namespace ex2_AP2
             client = GuiClient.Instance;
             Task task = new Task(() =>
             {
+                //loop until teh client is connected
                 while (!innerstop)
                 {
                     if (client != null && client.IsConnected)
@@ -110,6 +149,7 @@ namespace ex2_AP2
                         Console.WriteLine("in settings model client != null");
                     }
                 }
+                //register the method that handles what to do when got new message
                 if (client.isConnected())
                 {
                     client.GotMessage += this.GotMeesage;
@@ -124,10 +164,18 @@ namespace ex2_AP2
                 }
             });task.Start();
         }
+        /// <summary>
+        /// Notifies the property changed.
+        /// </summary>
+        /// <param name="propName">Name of the property.</param>
         public void NotifyPropertyChanged(String propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        /// <summary>
+        /// Removes the handler.
+        /// </summary>
+        /// <param name="path">The path to handler to move.</param>
         public void RemoveHandler(String path)
         {
             this.handlerToClose = path;
@@ -141,7 +189,11 @@ namespace ex2_AP2
             client.write(newMessage);
             //this.Listen();
         }
-
+        /// <summary>
+        /// detemines what to do when got a meesage (either got feedback for the operation or got the 
+        /// primary settings of the app config).
+        /// </summary>
+        /// <param name="message">The message.</param>
         public void GotMeesage(string message)
         {
             Console.WriteLine("in settings view model, got: " + message);
@@ -199,53 +251,3 @@ namespace ex2_AP2
         }
     }
 }
-
-/*
-    while (!stop)
-    {
-
-        //this.client.write(jobject);
-         string result = client.read();
-        Console.WriteLine(result);
-        if (result.Equals(ResultMessgeEnum.Success.ToString()))
-        {
-            Console.WriteLine("in settings model, got: " + result + ". removing handler now");
-            stop = true;
-            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-        {
-            this.handlers.Remove(path);
-        });
-            NotifyPropertyChanged("Handlers");
-
-        //stop = true;
-        //  res= true;
-        }
-        else
-        {
-        Console.WriteLine("something went wrong in removing handler");
-       // Task.Delay(1000);
-        //return false;
-        }
-        //res= false;
-    }
-});
-task.Start();
-//task.Wait();
-// taskRes = task.Result;
-// Console.WriteLine("in settings model after returning result, result is: " + taskRes);
-// return res;
-/*
-                if (!answer.Equals(ResultMessgeEnum.Fail))
-                {
-                    ImageServiceAppConfigItem initialConfig = ImageServiceAppConfigItem.FromJSON(answer);
-                    this.OutputDirectory = initialConfig.OutputFolder;
-                    this.LogName = initialConfig.LogName;
-                    this.sourceName = initialConfig.SourceName;
-                    this.thumbnailSize = initialConfig.ThumbnailSize;
-                    string[] folders = initialConfig.Handlers.Split(';');
-                    foreach (String folder in folders)
-                    {
-                        this.handlers.Add(folder);
-                    }
-                }
-                */

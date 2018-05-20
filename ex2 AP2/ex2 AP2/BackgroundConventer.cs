@@ -9,6 +9,11 @@ using System.Windows.Media;
 
 namespace ex2_AP2
 {
+    /// <summary>
+    /// a converter for the backgroud - if the client is connected then it would be green, otherwise 
+    /// gray.
+    /// </summary>
+    /// <seealso cref="System.Windows.Data.IValueConverter" />
     class BackgroundConventer : IValueConverter
     {
         public static readonly IValueConverter Instance = new BackgroundConventer();
