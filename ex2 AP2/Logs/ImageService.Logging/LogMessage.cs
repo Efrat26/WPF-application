@@ -5,15 +5,36 @@ using System;
 
 namespace Logs.ImageService.Logging
 {
+    /// <summary>
+    /// handles the log message object
+    /// </summary>
     public class LogMessage
     {
+        /// <summary>
+        /// The message
+        /// </summary>
         private String message;
+        /// <summary>
+        /// The type of the message
+        /// </summary>
         private MessageTypeEnum type;
+        /// <summary>
+        /// Gets or sets the message.
+        /// </summary>
+        /// <value>
+        /// The message.
+        /// </value>
         public String Message
         {
             get { return this.message; }
             set { this.message = value; }
         }
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public MessageTypeEnum Type
         {
             get { return this.type; }
@@ -39,11 +60,20 @@ namespace Logs.ImageService.Logging
                 }
             }
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LogMessage"/> class.
+        /// </summary>
+        /// <param name="m">The m.</param>
+        /// <param name="t">The t.</param>
         public LogMessage(String m, MessageTypeEnum t)
         {
             this.message = m;
             this.type = t;
         }
+        /// <summary>
+        /// converts to jason format.
+        /// </summary>
+        /// <returns></returns>
         public String ToJSON()
         {
             
@@ -52,6 +82,13 @@ namespace Logs.ImageService.Logging
             LogMessageSer["type"] = Type.ToString();
             return LogMessageSer.ToString();
         }
+        /// <summary>
+        /// converts back from jason.
+        /// in case it didnt succeded - it returns a message with
+        /// type waringing and a message that it couldn't convert the jason
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
         public static LogMessage FromJSON(string str)
         {
             LogMessage logMsg = new LogMessage("",MessageTypeEnum.FAIL);

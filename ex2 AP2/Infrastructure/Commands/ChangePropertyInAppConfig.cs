@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logs.Commands
 {
+    //not in use!
     class ChangePropertyInAppConfig : ICommand
     {
         /// <summary>

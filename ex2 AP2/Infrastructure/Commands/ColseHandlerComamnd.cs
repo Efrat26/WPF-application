@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Logs.Commands
 {
+    /// <summary>
+    /// closing specific handler command
+    /// </summary>
+    /// <seealso cref="Logs.Commands.ICommand" />
     class ColseHandlerComamnd : ICommand
     {
 

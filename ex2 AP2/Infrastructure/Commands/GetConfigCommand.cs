@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Logs.Commands
 {
+    /// <summary>
+    /// command for getting the app config item
+    /// </summary>
+    /// <seealso cref="Logs.Commands.ICommand" />
     public class GetConfigCommand : ICommand
     {
         /// <summary>

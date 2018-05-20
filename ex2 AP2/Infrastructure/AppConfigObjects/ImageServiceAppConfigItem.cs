@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace Logs.AppConfigObjects
 {
+    /// <summary>
+    /// represents an app config item
+    /// </summary>
     public class ImageServiceAppConfigItem
     {
+      //all the fields of the app config item & thier properties
         private String outputFolder;
         public String OutputFolder { get { return this.outputFolder; } set { this.outputFolder = value; } }
         private String handlers;
@@ -20,6 +24,14 @@ namespace Logs.AppConfigObjects
         public String LogName { get { return this.logName; } set { this.logName = value; } }
         private int thumbnailSize;
         public int ThumbnailSize{ get { return this.thumbnailSize; } set { this.thumbnailSize = value; } }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImageServiceAppConfigItem"/> class.
+        /// </summary>
+        /// <param name="output">The output folder path.</param>
+        /// <param name="handlers">The handlers.</param>
+        /// <param name="source">The source name.</param>
+        /// <param name="log">The log name.</param>
+        /// <param name="size">The thumbnail size.</param>
         public ImageServiceAppConfigItem(String output, String handlers, String source,
             String log, int size)
         {
@@ -29,17 +41,12 @@ namespace Logs.AppConfigObjects
             this.handlers = handlers;
             this.thumbnailSize = size;
         }
+        /// <summary>
+        /// converts to jason object.
+        /// </summary>
+        /// <returns></returns>
         public string ToJSON()
-        { /*
-            ImageServiceAppConfigItem item = new ImageServiceAppConfigItem(null, null, null, null, 0);
-            item.OutputFolder = this.outputFolder;
-            item.SourceName = this.sourceName;
-            item.LogName = this.logName;
-            item.Handlers = this.handlers;
-            item.ThumbnailSize = this.thumbnailSize;
-            return JsonConvert.SerializeObject(appConfigItem);
-            return JsonConvert.SerializeObject(item);
-            */
+        { 
             JObject appConfigItem = new JObject();
             appConfigItem["output"] = this.outputFolder;
             appConfigItem["source"] = this.sourceName;
@@ -47,9 +54,12 @@ namespace Logs.AppConfigObjects
             appConfigItem["handlers"] = this.handlers;
             appConfigItem["size"] = this.thumbnailSize;
             return appConfigItem.ToString();
-           
-            
         }
+        /// <summary>
+        /// converts back from the json.
+        /// </summary>
+        /// <param name="str">The string.</param>
+        /// <returns></returns>
         public static ImageServiceAppConfigItem FromJSON(string str)
         {
             ImageServiceAppConfigItem appconf = new ImageServiceAppConfigItem(null,null,null,null,0);
