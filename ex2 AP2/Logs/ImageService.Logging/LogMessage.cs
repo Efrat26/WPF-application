@@ -90,38 +90,3 @@ namespace Logs.ImageService.Logging
         }
     }
 }
-
-
-
-
-/*
-//Newtonsoft.Json.Linq.JObject logMessageItm = new Newtonsoft.Json.Linq.JObject();
-LogMessage logMessageItm = new LogMessage(null, MessageTypeEnum.INFO);
-logMessageItm.Message = this.Message;
-logMessageItm.Type = this.type;
-
-//logMessageItm["message"] = this.message;
-// logMessageItm["type"] = 
-return JsonConvert.SerializeObject(logMessageItm);
-//return logMessageItm.ToString();
-*/
-
-/*
-logMsg = JsonConvert.DeserializeObject<LogMessage>(str);
-
-   JObject json = JObject.Parse(str);
-logMsg.Message = (string)json["message"];
-string tmp = (string)json["type"];
-if (tmp.Equals(MessageTypeEnum.FAIL.ToString()))
-{
-    logMsg.type = MessageTypeEnum.FAIL;
-}
-else if (tmp.Equals(MessageTypeEnum.INFO.ToString()))
-{
-    logMsg.type = MessageTypeEnum.INFO;
-}
-else
-{
-    logMsg.type = MessageTypeEnum.WARNING;
-}
-*/

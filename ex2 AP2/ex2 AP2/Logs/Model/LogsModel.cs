@@ -60,7 +60,7 @@ namespace ex2_AP2.Logs.Model
             else
             {
                 LogMessage log = LogMessage.FromJSON(message);
-                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     this.logs.Add(log);
                     NotifyPropertyChanged("logs");
