@@ -18,7 +18,9 @@
 
     <StackPanel>
         <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center"/>
-        <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False" >
+        <DataGrid ItemsSource="{Binding Logs}" AutoGenerateColumns="False"  ScrollViewer.CanContentScroll="True" 
+      ScrollViewer.VerticalScrollBarVisibility="Auto"
+      ScrollViewer.HorizontalScrollBarVisibility="Auto" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" Width="1*" IsReadOnly="True" Binding="{Binding Type}">
                     <DataGridTextColumn.ElementStyle>

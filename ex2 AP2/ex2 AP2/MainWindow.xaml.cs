@@ -24,9 +24,10 @@ namespace ex2_AP2
         private MainWindowViewModel vm;
         public MainWindow()
         {
-            InitializeComponent();
             this.vm = new MainWindowViewModel();
+            InitializeComponent();
             this.DataContext = vm;
+           
         }
     }
 }
