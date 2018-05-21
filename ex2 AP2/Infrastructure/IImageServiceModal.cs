@@ -17,6 +17,5 @@ namespace Logs.Modal
 
         String GetAppconfig();
         String LogCommand();
-        String UpdateConfiguration(string[] args);
     }
 }

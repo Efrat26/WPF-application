@@ -17,7 +17,7 @@
     <StackPanel>
         <Label Style="{StaticResource settings_title}" Content="Settings" HorizontalContentAlignment="Center"/>
         <Grid TextBlock.FontSize="14">
-        <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
