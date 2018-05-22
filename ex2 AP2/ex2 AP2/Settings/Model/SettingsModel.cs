@@ -257,7 +257,7 @@ namespace ex2_AP2
                         {
                             this.handlers.Remove(h.Path);
                         });
-                        NotifyPropertyChanged("Handlers");
+                        //NotifyPropertyChanged("Handlers");
                     }
 
                 }

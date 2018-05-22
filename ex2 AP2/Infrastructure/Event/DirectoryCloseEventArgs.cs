@@ -38,21 +38,5 @@ namespace Logs.Modal.Event
             // Storing the String
             Message = message;                          
         }
-        public string ToJSON()
-        {
-            JObject directoryObj = new JObject();
-            directoryObj["Path"] = this.DirectoryPath;
-            directoryObj["Message"] = this.Message;
-            return directoryObj.ToString();
-        }
-        public DirectoryCloseEventArgs FromJSON(string str)
-        {
-            DirectoryCloseEventArgs directory = new DirectoryCloseEventArgs(null,null);
-
-            JObject directoryObj = JObject.Parse(str);
-            directory.DirectoryPath = (string)directoryObj["Path"];
-            directory.Message = (string)directoryObj["Message"];
-            return directory;
-        }
     }
 }

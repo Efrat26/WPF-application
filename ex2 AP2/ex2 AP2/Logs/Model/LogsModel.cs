@@ -80,7 +80,7 @@ namespace ex2_AP2.Logs.Model
                 App.Current.Dispatcher.Invoke((Action)delegate
                 {
                     this.logs.Add(log);
-                    NotifyPropertyChanged("logs");
+                    //NotifyPropertyChanged("logs");
                 });
             }
         }
