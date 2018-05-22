@@ -251,12 +251,14 @@ namespace ex2_AP2
                     Console.WriteLine("in settings model - got remove handler command, " +
                         "command is: " + message);
                     HandlerToClose h = HandlerToClose.FromJSON(message);
-
-                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    if (handlers.Contains(h.Path))
                     {
-                        this.handlers.Remove(h.Path);
-                    });
-                    NotifyPropertyChanged("Handlers");
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        {
+                            this.handlers.Remove(h.Path);
+                        });
+                        NotifyPropertyChanged("Handlers");
+                    }
 
                 }
                 catch (Exception)
