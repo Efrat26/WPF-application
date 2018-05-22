@@ -246,7 +246,23 @@ namespace ex2_AP2
             }
             else
             {
+                try
+                {
+                    Console.WriteLine("in settings model - got remove handler command, " +
+                        "command is: " + message);
+                    HandlerToClose h = HandlerToClose.FromJSON(message);
 
+                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    {
+                        this.handlers.Remove(h.Path);
+                    });
+                    NotifyPropertyChanged("Handlers");
+
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
     }

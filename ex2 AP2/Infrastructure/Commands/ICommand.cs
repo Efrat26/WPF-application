@@ -20,5 +20,7 @@ namespace Logs.Commands
         string Execute(string[] args, out bool result);          // The Function That will Execute The 
 
         string[] getArgs();
+        string ToJSON();
+        ICommand FromJSON(string command);
     }
 }

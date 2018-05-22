@@ -14,6 +14,7 @@ namespace Logs.Commands
     {
 
         string[] args;
+        string path;
         public string Execute(string[] args, out bool result)
         {
             this.args = args;
@@ -23,6 +24,14 @@ namespace Logs.Commands
         public string[] getArgs()
         {
             return this.args;
+        }
+        public string ToJSON()
+        {
+            return null;
+        }
+        public ICommand FromJSON(string command)
+        {
+            return null;
         }
     }
 

@@ -37,5 +37,13 @@ namespace Logs.Commands
         {
             return null;
         }
+        public string ToJSON()
+        {
+            return null;
+        }
+        public ICommand FromJSON(string command)
+        {
+            return null;
+        }
     }
 }

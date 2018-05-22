@@ -47,7 +47,17 @@ namespace Logs.Commands
                 return res;
             }
         }
-       public string[] getArgs()
+
+        public string[] getArgs()
+        {
+            return null;
+        }
+
+        public string ToJSON()
+        {
+            return null;
+        }
+        public ICommand FromJSON(string command)
         {
             return null;
         }
