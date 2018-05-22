@@ -17,10 +17,10 @@
     </UserControl.Resources>
 
     <Grid>
-    <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource logs_title}" Content="Logs" HorizontalContentAlignment="Center" VerticalAlignment="Top"/>
     <DataGrid VerticalAlignment="Center" ItemsSource="{Binding Logs}" AutoGenerateColumns="False"  ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto"
-      ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+      ScrollViewer.HorizontalScrollBarVisibility="Auto">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Type" Width="1*" IsReadOnly="True" Binding="{Binding Type}"
                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -31,7 +31,8 @@
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
-            <DataGridTextColumn Header="Message" Width="3*" IsReadOnly="True" Binding="{Binding Message}">
+            <DataGridTextColumn Header="Message" Width="3*" IsReadOnly="True" Binding="{Binding Message}"
+                                ScrollViewer.HorizontalScrollBarVisibility="Auto">
             </DataGridTextColumn>
         </DataGrid.Columns>
     </DataGrid>
