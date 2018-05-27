@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logs.Controller.Handlers
+namespace Infrastructure
 {
     /// <summary>
     /// interfacr for object that handles the directories
     /// </summary>
-    interface IDirectoryHandler
+    public interface IDirectoryHandler
     {
         // The Event That Notifies that the Directory is being closed
         event EventHandler<DirectoryCloseEventArgs> DirectoryClose;
@@ -38,6 +38,20 @@ namespace Logs.Controller.Handlers
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="FileSystemEventArgs"/> instance containing the event data.</param>
         void OnNewFile(object sender, FileSystemEventArgs e);
+        /// <summary>
+        /// Gets or sets the full path.
+        /// </summary>
+        /// <value>
+        /// The full path.
+        /// </value>
         String FullPath { get; set; }
+        /// <summary>
+        /// Updates the app config file.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns></returns>
+        String UpdateConfiguration(string key, string value, string fileName);
     }
 }
